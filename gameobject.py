@@ -73,6 +73,7 @@ class GameObject(ABC):
                 return animation.fromValue + animation.deltaValue
             return animation.fromValue + (animation.deltaValue * animation.currentProgress)
 
+    @abstractmethod
     def onFrameTick(self, dt):
         highPriority = []
         for anim in self.animationList:
@@ -102,16 +103,17 @@ class GameObject(ABC):
                 self.scaleY = self._calculateNextValue(self.scaleY, anim)
             elif anim.valueName == AnimationParams.scaleZ:
                 self.scaleZ = self._calculateNextValue(self.scaleZ, anim)
-            elif anim.valueName == AnimationParams.scaleZ:
+            elif anim.valueName == AnimationParams.rotY:
                 self.rotY = self._calculateNextValue(self.rotY, anim)
 
             anim.currentProgress += (dt / anim.animationTime)
 
         for tbr in toBeRemoved:
+            self.animationList.remove(tbr)
             if not tbr.onAnimationFinished is None:
                 tbr.onAnimationFinished()
                 print("on animation finished called !!")
-            self.animationList.remove(tbr)
 
     def startAnimation(self, animation):
+        animation.currentProgress=0
         self.animationList.append(animation)

@@ -4,7 +4,6 @@ from OpenGL.GLU import *
 import numpy as np
 from math import *
 from random import random
-from People import *
 
 z = 0
 x = 0
@@ -157,6 +156,7 @@ class betch():
         glVertex(12, 0, -19)
         glEnd()
 
+
 def draw_car_park():
     glColor(0.25, 0.3, 0.25)
     glBegin(GL_POLYGON)
@@ -173,27 +173,29 @@ def draw_car_park():
     glVertex(32, 0, -10)
     glEnd()
     glBegin(GL_LINES)
-    glVertex(-30,0,-15)
-    glVertex(-14,0,-15)
-    glVertex(-30,0,-20)
-    glVertex(-14,0,-20)
-    glVertex(-30,0,-25)
-    glVertex(-14,0,-25)
-    glVertex(-30,0,-30)
-    glVertex(-14,0,-30)
-    glVertex(-30,0,-35)
-    glVertex(-14,0,-35)
-    glVertex(32,0,-15)
-    glVertex(14,0,-15)
-    glVertex(32,0,-20)
-    glVertex(14,0,-20)
-    glVertex(32,0,-25)
-    glVertex(14,0,-25)
-    glVertex(32,0,-30)
-    glVertex(14,0,-30)
-    glVertex(32,0,-35)
-    glVertex(14,0,-35)
+    glVertex(-30, 0, -15)
+    glVertex(-14, 0, -15)
+    glVertex(-30, 0, -20)
+    glVertex(-14, 0, -20)
+    glVertex(-30, 0, -25)
+    glVertex(-14, 0, -25)
+    glVertex(-30, 0, -30)
+    glVertex(-14, 0, -30)
+    glVertex(-30, 0, -35)
+    glVertex(-14, 0, -35)
+    glVertex(32, 0, -15)
+    glVertex(14, 0, -15)
+    glVertex(32, 0, -20)
+    glVertex(14, 0, -20)
+    glVertex(32, 0, -25)
+    glVertex(14, 0, -25)
+    glVertex(32, 0, -30)
+    glVertex(14, 0, -30)
+    glVertex(32, 0, -35)
+    glVertex(14, 0, -35)
     glEnd()
+
+
 class map():
     def __init__(self):
         return
@@ -219,51 +221,8 @@ class map():
         r1.draw()
 
 
-def draw():
-    myInit()
-
+def drawMap():
     mainMap = map()
     mainMap.draw()
-    Draww()
     glutSwapBuffers()
 
-
-def specialKey(key, f, g):
-    global z
-    global x
-    global y
-    if key == GLUT_KEY_LEFT:
-        x -= 3
-    elif key == GLUT_KEY_RIGHT:
-        x += 3
-    elif key == GLUT_KEY_UP:
-        z -= 3
-    elif key == GLUT_KEY_DOWN:
-        z += 3
-    elif key == GLUT_KEY_PAGE_UP:
-        y += 5
-    elif key == GLUT_KEY_PAGE_DOWN:
-        y -= 5
-
-    draw()
-
-
-def keyStrock(key, x, y):
-    global c
-    if key == b'a':
-        c += 0.3
-    if key == b's':
-        c -= 0.3
-    draw()
-
-
-glutInit()
-glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB)
-glutInitWindowSize(500, 500)
-glutCreateWindow(b"first opengl program")
-
-glutDisplayFunc(draw)
-glutKeyboardFunc(keyStrock)
-glutSpecialFunc(specialKey)
-glutIdleFunc(draw)
-glutMainLoop()

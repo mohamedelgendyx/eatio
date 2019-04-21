@@ -7,7 +7,7 @@ from OpenGL.GLUT import *
 
 
 def initCamera():
-    glEnable(GL_DEPTH_TEST)
+    #glEnable(GL_DEPTH_TEST)
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
     gluPerspective(60, 1, 0.1, 50)

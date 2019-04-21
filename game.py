@@ -1,5 +1,6 @@
 from time import time
 
+from CharacterObject import CharacterObject
 from gameobject import *
 
 from gametextures import drawImage2D, drawText2D
@@ -8,33 +9,16 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 from gamestatus import *
-
+from MainMap import drawMap
 deltaTime = 0
 currentTime = 0
 
 currentGameStatus = 0
 currentGameScore = 1997
 
-
-class SimpleObj(GameObject):
-
-    def __init__(self, posX, posY, posZ, scaleX, scaleY, scaleZ, rotY):
-        super().__init__(posX, posY, posZ, scaleX, scaleY, scaleZ, rotY)
-
-    def draw(self):
-        self.applyParentTransform()
-        glColor3f(0, 0, 1)
-        glScale(1, 0.01, 1)
-        glutSolidCube(2)
-
-        self.applyParentTransform()
-        glColor3f(1, 0, 0)
-        glutWireCube(2)
-
-
-player = SimpleObj(0, 0, 0,
-                   1, 1, 1,
-                   0)
+p = CharacterObject(0, 0, 0,
+                    1, 1, 1,
+                    0)
 
 
 def draw():
@@ -53,7 +37,7 @@ def draw():
     global currentGameScore
 
     glClearColor(0, 0, 0, 1)
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    glClear(GL_COLOR_BUFFER_BIT)
     glColor3f(0, 0, 1)
     glLoadIdentity()
 
@@ -68,8 +52,12 @@ def draw():
     if GAME_STATUS_PLAYING < currentGameStatus < GAME_STATUS_SCORE:
         initCamera()
         glLoadIdentity()
-        player.onFrameTick(deltaTime)
-        player.draw()
+        # player.onFrameTick(deltaTime)
+        # player.draw()
+        drawMap()
+        glLoadIdentity()
+        p.onFrameTick(deltaTime)
+        p.draw()
 
     if GAME_STATUS_COUNTDOWN <= currentGameStatus < GAME_STATUS_PLAYING:
         glMatrixMode(GL_PROJECTION)
@@ -106,11 +94,11 @@ def onKeyboardKeyDown(key, x, y):
 
 def onSpecialKeyDown(key, x, y):
     if key == GLUT_KEY_UP:
-        player.startAnimation(Animation(AnimationParams.posY, None, 3, 3, onAnimationFinished=lambda: print("callback!!")))
+        a1 = DeltaAnimation(AnimationParams.posX, 3, 1, onAnimationFinished=lambda:  p.startAnimation(a2), priority=AnimationPriority.High)
+        a2 = DeltaAnimation(AnimationParams.posX, -3, 1, onAnimationFinished=lambda: p.startAnimation(a1), priority=AnimationPriority.High)
+        p.startAnimation(a1)
     if key == GLUT_KEY_DOWN:
-        player.startAnimation(DeltaAnimation(AnimationParams.posX, 5, 3, priority=AnimationPriority.High))
-        player.startAnimation(
-            Animation(AnimationParams.posY, None, 0, 3, priority=AnimationPriority.High, onAnimationFinished=lambda: print("callback!!")))
+        p.startAnimation(DeltaAnimation(AnimationParams.rotY, 90, 1, priority=AnimationPriority.High))
 
 
 def onMouseKeyDown(button, state, x, y):
