@@ -1,5 +1,6 @@
-from abc import ABC, abstractmethod
 from time import time
+
+from gameobject import *
 
 from gametextures import drawImage2D, drawText2D
 from initopengl import initOpenGl, initCamera
@@ -8,126 +9,17 @@ from OpenGL.GLU import *
 from OpenGL.GLUT import *
 from gamestatus import *
 
+deltaTime = 0
+currentTime = 0
+
 currentGameStatus = 0
 currentGameScore = 1997
-
-ANIMATION_PRIORITY_NORMAL = 0
-ANIMATION_PRIORITY_IGNORE_OTHERS = 1997
-
-
-class Animation:
-
-    def __init__(self, valueName, fromValue, toValue, animationTime, priority=ANIMATION_PRIORITY_NORMAL):
-        self.valueName = valueName
-        self.fromValue = fromValue
-        self.toValue = toValue
-        self.animationTime = animationTime
-        self.priority = priority
-        self.currentProgress = 0
-
-
-class DeltaAnimation:
-
-    def __init__(self, valueName, deltaValue, animationTime, priority=ANIMATION_PRIORITY_NORMAL):
-        self.valueName = valueName
-        self.deltaValue = deltaValue
-        self.animationTime = animationTime
-        self.priority = priority
-        self.currentProgress = 0
-        self.fromValue = None
-
-
-class GameObject(ABC):
-
-    def __init__(self, posX, posY, posZ, scaleX, scaleY, scaleZ, rotAngle, rotX, rotY, rotZ):
-        self.posX = posX
-        self.posY = posY
-        self.posZ = posZ
-
-        self.scaleX = scaleX
-        self.scaleY = scaleY
-        self.scaleZ = scaleZ
-
-        self.rotAngle = rotAngle
-        self.rotX = rotX
-        self.rotY = rotY
-        self.rotZ = rotZ
-
-        self.animationList = []
-        super().__init__()
-
-    def applyParentTransform(self):
-        glLoadIdentity()
-        glTranslate(self.posX, self.posY, self.posZ)
-        glScale(self.scaleX, self.scaleY, self.scaleZ)
-        glRotate(self.rotAngle, self.rotX, self.rotY, self.rotZ)
-
-    @abstractmethod
-    def draw(self):
-        pass
-
-    @staticmethod
-    def _calculateNextValue(currentValue, animation):
-
-        if isinstance(animation, Animation):
-            if animation.fromValue is None:
-                animation.fromValue = currentValue
-                if animation.fromValue == animation.toValue:
-                    animation.currentProgress = 1
-            if animation.currentProgress >= 1:
-                return animation.toValue
-            return animation.fromValue + ((animation.toValue - animation.fromValue) * animation.currentProgress)
-        elif isinstance(animation, DeltaAnimation):
-            if animation.fromValue is None:
-                animation.fromValue = currentValue
-            if animation.currentProgress >= 1:
-                return animation.fromValue + animation.deltaValue
-            return animation.fromValue + (animation.deltaValue * animation.currentProgress)
-
-    def onFrameTick(self, dt):
-        highPriority = []
-        for anim in self.animationList:
-            if anim.priority == ANIMATION_PRIORITY_IGNORE_OTHERS:
-                highPriority.append(anim)
-
-        if len(highPriority) > 0:
-            self.animationList.clear()
-            for anim in highPriority:
-                self.animationList.append(anim)
-
-        toBeRemoved = []
-        for anim in self.animationList:
-
-            if anim.currentProgress >= 1:
-                toBeRemoved.append(anim)
-
-            if anim.valueName == "posX":
-                self.posX = self._calculateNextValue(self.posX, anim)
-            elif anim.valueName == "posY":
-                self.posY = self._calculateNextValue(self.posY, anim)
-            elif anim.valueName == "posZ":
-                self.posZ = self._calculateNextValue(self.posZ, anim)
-            elif anim.valueName == "scaleX":
-                self.scaleX = self._calculateNextValue(self.scaleX, anim)
-            elif anim.valueName == "scaleY":
-                self.scaleY = self._calculateNextValue(self.scaleY, anim)
-            elif anim.valueName == "scaleZ":
-                self.scaleZ = self._calculateNextValue(self.scaleZ, anim)
-
-            anim.currentProgress += (dt / anim.animationTime)
-
-        for tbr in toBeRemoved:
-            self.animationList.remove(tbr)
-            print("removed aniamtion !!")
-
-    def startAnimation(self, animation):
-        self.animationList.append(animation)
 
 
 class SimpleObj(GameObject):
 
-    def __init__(self, posX, posY, posZ, scaleX, scaleY, scaleZ, rotAngle, rotX, rotY, rotZ):
-        super().__init__(posX, posY, posZ, scaleX, scaleY, scaleZ, rotAngle, rotX, rotY, rotZ)
+    def __init__(self, posX, posY, posZ, scaleX, scaleY, scaleZ, rotY):
+        super().__init__(posX, posY, posZ, scaleX, scaleY, scaleZ, rotY)
 
     def draw(self):
         self.applyParentTransform()
@@ -140,21 +32,22 @@ class SimpleObj(GameObject):
         glutWireCube(2)
 
 
-deltaTime = 0
-currentTime = 0
-
-player = SimpleObj(1, 0, 0,
+player = SimpleObj(0, 0, 0,
                    1, 1, 1,
-                   0, 0, 0, 0)
+                   0)
 
 
 def draw():
+    # Delta Time
     global currentTime
     global deltaTime
     newTime = time()
     frameTime = newTime - currentTime
     currentTime = newTime
     deltaTime = frameTime
+
+    # Speed Factor
+    deltaTime *= GAME_SPEED_FACTOR
 
     global currentGameStatus
     global currentGameScore
@@ -195,7 +88,7 @@ def draw():
         glLoadIdentity()
         gluOrtho2D(-5, 5, -5, 5)
         glMatrixMode(GL_MODELVIEW)
-        drawText2D("CLICK TO PLAY!", 0, 0, scaleFactor=0.5)
+        drawText2D("CLICK TO PLAY !", 0, 0, scaleFactor=0.5)
         # drawImage2D("resources/images/clicktoplay.png", 0, 0)
 
     if not currentGameStatus == GAME_STATUS_MAINMENU:
@@ -213,10 +106,11 @@ def onKeyboardKeyDown(key, x, y):
 
 def onSpecialKeyDown(key, x, y):
     if key == GLUT_KEY_UP:
-        player.startAnimation(DeltaAnimation("posX", 10, 3))
-
+        player.startAnimation(Animation(AnimationParams.posY, None, 3, 3, onAnimationFinished=lambda: print("callback!!")))
     if key == GLUT_KEY_DOWN:
-        player.startAnimation(Animation("posX", None, 5, 3, ANIMATION_PRIORITY_IGNORE_OTHERS))
+        player.startAnimation(DeltaAnimation(AnimationParams.posX, 5, 3, priority=AnimationPriority.High))
+        player.startAnimation(
+            Animation(AnimationParams.posY, None, 0, 3, priority=AnimationPriority.High, onAnimationFinished=lambda: print("callback!!")))
 
 
 def onMouseKeyDown(button, state, x, y):
