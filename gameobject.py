@@ -30,7 +30,7 @@ class DeltaAnimation:
 
 class GameObject(ABC):
 
-    def __init__(self, posX, posY, posZ, scaleX, scaleY, scaleZ, rotY):
+    def __init__(self, posX, posY, posZ, scaleX=1, scaleY=1, scaleZ=1, rotY=0):
         self.posX = posX
         self.posY = posY
         self.posZ = posZ
@@ -73,7 +73,6 @@ class GameObject(ABC):
                 return animation.fromValue + animation.deltaValue
             return animation.fromValue + (animation.deltaValue * animation.currentProgress)
 
-    @abstractmethod
     def onFrameTick(self, dt):
         highPriority = []
         for anim in self.animationList:

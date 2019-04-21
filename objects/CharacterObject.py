@@ -9,7 +9,7 @@ from gameobject import *
 
 class CharacterObject(GameObject):
 
-    def __init__(self, posX, posY, posZ, scaleX, scaleY, scaleZ, rotY):
+    def __init__(self, posX, posY, posZ, scaleX=1, scaleY=1, scaleZ=1, rotY=0):
         super().__init__(posX, posY, posZ, scaleX, scaleY, scaleZ, rotY)
         self.HeadDeltaY = 0
         self.HeadUpDown = 1
@@ -19,17 +19,17 @@ class CharacterObject(GameObject):
         glColor3f(0.1, 0, 0.2)
         glTranslate(0, 2, 0)
         glScale(.8, 1.5, .5)
-        glutSolidCube(2)
+        glutSolidCube(1.95)
 
         self.applyParentTransform()
         glColor3f(241 / 255, 195 / 255, 125 / 255)
-        glTranslate(0, 3.5+self.HeadDeltaY, 0)
+        glTranslate(0, 3.5 + self.HeadDeltaY, 0)
         glScale(.8, .5, .5)
-        glutSolidCube(2)
+        glutSolidCube(2.05)
 
         self.applyParentTransform()
         glColor3f(0.1, 0.2, 0.3)
-        glTranslate(0, 4+self.HeadDeltaY, 0)
+        glTranslate(0, 4 + self.HeadDeltaY, 0)
         glScale(.8, .2, .5)
         glutSolidCube(2)
 
@@ -40,6 +40,6 @@ class CharacterObject(GameObject):
         if self.HeadDeltaY < -0.3:
             self.HeadUpDown = 1
         if self.HeadUpDown:
-            self.HeadDeltaY += dt*2
+            self.HeadDeltaY += dt * 2
         else:
-            self.HeadDeltaY -= dt*2
+            self.HeadDeltaY -= dt * 2

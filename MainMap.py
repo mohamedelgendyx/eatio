@@ -1,9 +1,7 @@
-from OpenGL.GL import *
-from OpenGL.GLUT import *
-from OpenGL.GLU import *
-import numpy as np
 from math import *
-from random import random
+
+import numpy as np
+from OpenGL.GL import *
 
 z = 0
 x = 0
@@ -19,19 +17,6 @@ def draw_circle(r=0.5, xc=0, yc=0, R=1, g=1, b=1, start=0, end=2 * pi):
         y = yc + r * sin(theta)
         glVertex(x, 0, y)
     glEnd()
-
-
-def myInit():
-    glMatrixMode(GL_PROJECTION)
-    glLoadIdentity()
-    gluPerspective(60, 1, 0, 105)
-    gluLookAt(x, y + 5, z + 3,
-              x, y, z + -10 + c,
-              0, 1, 0)
-    glClearColor(0.53, 0.81, 0.92, 1)
-    glClear(GL_COLOR_BUFFER_BIT)
-    glMatrixMode(GL_MODELVIEW)
-    glLoadIdentity()
 
 
 class Road:
@@ -198,7 +183,7 @@ def draw_car_park():
 
 class map():
     def __init__(self):
-        return
+        pass
 
     def draw(self):
         glLoadIdentity()
@@ -224,5 +209,3 @@ class map():
 def drawMap():
     mainMap = map()
     mainMap.draw()
-    glutSwapBuffers()
-
