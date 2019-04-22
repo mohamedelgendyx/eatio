@@ -187,6 +187,7 @@ class map():
 
     def draw(self):
         glLoadIdentity()
+        glEnable(GL_DEPTH_TEST)
         glColor(0.8, 0.8, 0.8)
         glBegin(GL_POLYGON)
         glVertex(-100, 0, 0)
@@ -194,6 +195,7 @@ class map():
         glVertex(100, 0, -100)
         glVertex(100, 0, 0)
         glEnd()
+        glDisable(GL_DEPTH_TEST)
         draw_car_park()
         draw_roads()
         r = betch()

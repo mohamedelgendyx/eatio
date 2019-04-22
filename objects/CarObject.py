@@ -505,11 +505,12 @@ class Car_bus(GameObject):
         glutSolidCube(3)
 
 
+# first cycle
 def fourthPart(obj):
     obj.rotY = 270
     # a7 = Animation(AnimationParams.posX, None, -94.25, 3)
     a8 = Animation(AnimationParams.posZ, None, -52.75, 3)
-    a8.onAnimationFinished = lambda: startCycle(obj)
+    a8.onAnimationFinished = lambda: startCycle_1(obj)
     # obj.startAnimation(a7)
     obj.startAnimation(a8)
 
@@ -532,12 +533,12 @@ def secondPart(obj):
     obj.startAnimation(a4)
 
 
-def startCycle(obj):
+def startCycle_1(obj, offsetTime=0):
     obj.posX = -96
     obj.posZ = -52.75
     obj.rotY = 0
-    a1 = Animation(AnimationParams.posX, None, -34, 3)
-    a2 = Animation(AnimationParams.posZ, None, -52.75, 3)
+    a1 = Animation(AnimationParams.posX, None, -34, 3 + offsetTime)
+    a2 = Animation(AnimationParams.posZ, None, -52.75, 3 + offsetTime)
     a1.onAnimationFinished = lambda: secondPart(obj)
     obj.startAnimation(a1)
     obj.startAnimation(a2)
