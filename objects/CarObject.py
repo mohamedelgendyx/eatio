@@ -16,7 +16,9 @@ class Car1(GameObject):
         super().__init__(posX, posY, posZ, scaleX, scaleY, scaleZ, rotY)
 
     def draw(self):
+        offsetFromTheGround = 1
         self.applyParentTransform()
+        glTranslate(0, offsetFromTheGround, 0)
         glRotate(0, 0, 0, 0)
         glColor3f(0, 0, 1)
         glScalef(1, 0.25, 0.5)
@@ -26,6 +28,7 @@ class Car1(GameObject):
 
         # Upper Body
         self.applyParentTransform()
+        glTranslate(0, offsetFromTheGround, 0)
         glRotate(0, 0, 0, 0)
         glColor3f(0, 0, 1)
         glTranslate(0, 0.25 * 5, 0)
@@ -34,6 +37,7 @@ class Car1(GameObject):
 
         # front Glass
         self.applyParentTransform()
+        glTranslate(0, offsetFromTheGround, 0)
         glRotate(0, 0, 0, 0)
         glColor3f(0, 0, 0)
         glTranslate(1.3, 0.25 * 5, 0)
@@ -42,6 +46,7 @@ class Car1(GameObject):
 
         # left Glass
         self.applyParentTransform()
+        glTranslate(0, offsetFromTheGround, 0)
         glRotate(0, 0, 0, 0)
         glColor3f(0, 0, 0)
         glRotate(90, 0, 1, 0)
@@ -51,6 +56,7 @@ class Car1(GameObject):
 
         # Right Glass
         self.applyParentTransform()
+        glTranslate(0, offsetFromTheGround, 0)
         glRotate(0, 0, 0, 0)
         glColor3f(0, 0, 0)
         glRotate(-90, 0, 1, 0)
@@ -60,6 +66,7 @@ class Car1(GameObject):
 
         # back glass
         self.applyParentTransform()
+        glTranslate(0, offsetFromTheGround, 0)
         glRotate(0, 0, 0, 0)
         glColor3f(0, 0, 0)
         glRotate(180, 0, 1, 0)
@@ -71,6 +78,7 @@ class Car1(GameObject):
 
         # Right front
         self.applyParentTransform()
+        glTranslate(0, offsetFromTheGround, 0)
         glRotate(0, 0, 0, 0)
         glColor3f(0, 0, 0)
         glTranslate(2, -2.5 * 0.2, 2.5 * 0.5)
@@ -78,6 +86,7 @@ class Car1(GameObject):
         glutSolidCube(2)
         # inside
         self.applyParentTransform()
+        glTranslate(0, offsetFromTheGround, 0)
         glRotate(0, 0, 0, 0)
         glColor3f(0.6, 0.6, 0.6)
         glTranslate(2, -2.5 * 0.2, 1.6)
@@ -86,6 +95,7 @@ class Car1(GameObject):
 
         # Left front
         self.applyParentTransform()
+        glTranslate(0, offsetFromTheGround, 0)
         glRotate(0, 0, 0, 0)
         glColor3f(0, 0, 0)
         glTranslate(2, -2.5 * 0.2, -2.5 * 0.5)
@@ -94,6 +104,7 @@ class Car1(GameObject):
 
         # inside
         self.applyParentTransform()
+        glTranslate(0, offsetFromTheGround, 0)
         glRotate(0, 0, 0, 0)
         glColor3f(0.6, 0.6, 0.6)
         glTranslate(2, -2.5 * 0.2, -1.6)
@@ -102,6 +113,7 @@ class Car1(GameObject):
 
         # Right back
         self.applyParentTransform()
+        glTranslate(0, offsetFromTheGround, 0)
         glRotate(0, 0, 0, 0)
         glColor3f(0, 0, 0)
         glTranslate(-2, -2.5 * 0.2, 2.5 * 0.5)
@@ -110,6 +122,7 @@ class Car1(GameObject):
 
         # inside
         self.applyParentTransform()
+        glTranslate(0, offsetFromTheGround, 0)
         glRotate(0, 0, 0, 0)
         glColor3f(0.6, 0.6, 0.6)
         glTranslate(-2, -2.5 * 0.2, 1.6)
@@ -118,6 +131,7 @@ class Car1(GameObject):
 
         # Left back
         self.applyParentTransform()
+        glTranslate(0, offsetFromTheGround, 0)
         glRotate(0, 0, 0, 0)
         glColor3f(0, 0, 0)
         glTranslate(-2, -2.5 * 0.2, -2.5 * 0.5)
@@ -126,6 +140,7 @@ class Car1(GameObject):
 
         # inside
         self.applyParentTransform()
+        glTranslate(0, offsetFromTheGround, 0)
         glRotate(0, 0, 0, 0)
         glColor3f(0.6, 0.6, 0.6)
         glTranslate(-2, -2.5 * 0.2, -1.6)
@@ -135,6 +150,7 @@ class Car1(GameObject):
         # Lamps
         # Right
         self.applyParentTransform()
+        glTranslate(0, offsetFromTheGround, 0)
         glRotate(0, 0, 0, 0)
         glColor3f(0, 0, 0)
         glTranslate(2.6, 1.5 * 0.25, 1)
@@ -143,6 +159,7 @@ class Car1(GameObject):
 
         # Left
         self.applyParentTransform()
+        glTranslate(0, offsetFromTheGround, 0)
         glRotate(0, 0, 0, 0)
         glColor3f(0, 0, 0)
         glTranslate(2.6, 1.5 * 0.25, -0.3)
@@ -506,7 +523,7 @@ class Car_bus(GameObject):
 
 
 # first cycle
-def fourthPart(obj):
+def fourthPart_1(obj):
     obj.rotY = 270
     # a7 = Animation(AnimationParams.posX, None, -94.25, 3)
     a8 = Animation(AnimationParams.posZ, None, -52.75, 3)
@@ -515,20 +532,20 @@ def fourthPart(obj):
     obj.startAnimation(a8)
 
 
-def thirdPart(obj):
+def thirdPart_1(obj):
     obj.rotY = 180
     a5 = Animation(AnimationParams.posX, None, -96, 3)
     # a6 = Animation(AnimationParams.posZ, None, -93.5, 3)
-    a5.onAnimationFinished = lambda: fourthPart(obj)
+    a5.onAnimationFinished = lambda: fourthPart_1(obj)
     obj.startAnimation(a5)
     # obj.startAnimation(a6)
 
 
-def secondPart(obj):
+def secondPart_1(obj):
     obj.rotY = 90
     # a3 = Animation(AnimationParams.posX, None, -35, 3)
     a4 = Animation(AnimationParams.posZ, None, -96, 3)
-    a4.onAnimationFinished = lambda: thirdPart(obj)
+    a4.onAnimationFinished = lambda: thirdPart_1(obj)
     # obj.startAnimation(a3)
     obj.startAnimation(a4)
 
@@ -537,8 +554,49 @@ def startCycle_1(obj, offsetTime=0):
     obj.posX = -96
     obj.posZ = -52.75
     obj.rotY = 0
-    a1 = Animation(AnimationParams.posX, None, -34, 3 + offsetTime)
+    a1 = Animation(AnimationParams.posX, None, -34, 3)
+    a2 = Animation(AnimationParams.posZ, None, -52.75, 3)
+    a1.onAnimationFinished = lambda: secondPart_1(obj)
+    obj.startAnimation(a1)
+    a1.currentProgress = (offsetTime / 3)
+    obj.startAnimation(a2)
+    a2.currentProgress = (offsetTime / 3)
+
+
+# first cycle
+def fourthPart_2(obj):
+    obj.rotY = 270
+    # a7 = Animation(AnimationParams.posX, None, -94.25, 3)
+    a8 = Animation(AnimationParams.posZ, None, -52.75, 3)
+    a8.onAnimationFinished = lambda: startCycle_2(obj)
+    # obj.startAnimation(a7)
+    obj.startAnimation(a8)
+
+
+def thirdPart_2(obj):
+    obj.rotY = 180
+    a5 = Animation(AnimationParams.posX, None, 96, 3)
+    # a6 = Animation(AnimationParams.posZ, None, -93.5, 3)
+    a5.onAnimationFinished = lambda: fourthPart_2(obj)
+    obj.startAnimation(a5)
+    # obj.startAnimation(a6)
+
+
+def secondPart_2(obj):
+    obj.rotY = 90
+    # a3 = Animation(AnimationParams.posX, None, -35, 3)
+    a4 = Animation(AnimationParams.posZ, None, -96, 3)
+    a4.onAnimationFinished = lambda: thirdPart_2(obj)
+    # obj.startAnimation(a3)
+    obj.startAnimation(a4)
+
+
+def startCycle_2(obj, offsetTime=0):
+    obj.posX = 96
+    obj.posZ = -52.75
+    obj.rotY = 0
+    a1 = Animation(AnimationParams.posX, None, 34, 3 + offsetTime)
     a2 = Animation(AnimationParams.posZ, None, -52.75, 3 + offsetTime)
-    a1.onAnimationFinished = lambda: secondPart(obj)
+    a1.onAnimationFinished = lambda: secondPart_2(obj)
     obj.startAnimation(a1)
     obj.startAnimation(a2)

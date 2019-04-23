@@ -15,7 +15,6 @@ class Animation:
         self.currentProgress = 0
         self.onAnimationFinished = onAnimationFinished
 
-
 class DeltaAnimation:
 
     def __init__(self, valueName, deltaValue, animationTime, priority=AnimationPriority.Normal, onAnimationFinished=None):
@@ -58,6 +57,7 @@ class GameObject(ABC):
     def _calculateNextValue(currentValue, animation):
 
         if isinstance(animation, Animation):
+
             if animation.fromValue is None:
                 animation.fromValue = currentValue
                 if animation.fromValue == animation.toValue:
@@ -114,5 +114,5 @@ class GameObject(ABC):
                 print("on animation finished called !!")
 
     def startAnimation(self, animation):
-        animation.currentProgress=0
+        animation.currentProgress = 0
         self.animationList.append(animation)
