@@ -94,14 +94,6 @@ def createMapObjects():
         TrafficlightsObject(-91.5, 0, -45, rotY=180),
         TrafficlightsObject(-91.5, 0, -55, rotY=180),
         TrafficlightsObject(-91.5, 0, -90, rotY=180),
-        # homes
-        HomeObject_3(-80, 0, -80, rotY=180),
-        HomeObject_2(-70, 0, -80, rotY=180),
-        HomeObject_2(-70, 0, -75, rotY=180),
-        HomeObject_2(-70, 0, -70, rotY=180),
-        HomeObject_2(-70, 0, -65, rotY=180),
-        HomeObject_2(-70, 0, -60, rotY=180),
-        HomeObject_1(-55, 0, -80, rotY=180),
         # cylinders_1
         CylinderObject_1(-89, 0, -9),
         CylinderObject_1(-88.5, 0, -9),
