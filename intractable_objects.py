@@ -219,7 +219,6 @@ def createMapObjects():
     startCycle_1(c2, 3)
     startCycle_2(c3)
     startCycle_2(c4, 3)
-    draw_barriers()
     return objs
 
 
