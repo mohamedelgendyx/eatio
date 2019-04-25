@@ -40,14 +40,15 @@ class ConeObject(GameObject):
         super().__init__(posX, posY, posZ, scaleX, scaleY, scaleZ, rotY)
 
     def draw(self):
+        glColor3f(0.99, 0.6, 0.1)
         self.applyParentTransform()
-        glColor3f(0.89, 0.51, 0.1)
         glScale(1, 0.1, 1)
         glutSolidCube(.8)
 
+        glColor3f(0.89, 0.51, 0.1)
         self.applyParentTransform()
         glRotate(-90, 1, 0, 0)
-        glutSolidCone(.4, 1.5, 10, 10)
+        glutSolidCone(.4, 1.2, 10, 10)
 
 
 class CylinderObject_1(GameObject):
@@ -66,16 +67,17 @@ class CylinderObject_2(GameObject):
         super().__init__(posX, posY, posZ, scaleX, scaleY, scaleZ, rotY)
 
     def draw(self):
-        self.applyParentTransform()
         glColor3f(0.36, 0.59, 0.23)
-        glRotate(-90, 1, 0, 0)
-        glutSolidCylinder(0.5, 0.7, 6, 5)
-
         self.applyParentTransform()
-        glColor3f(0.83, 1, 0.97)
-        glTranslate(0, .8, 0)
         glRotate(-90, 1, 0, 0)
-        glutSolidCylinder(0.5, 0.04, 6, 5)
+        glutSolidCylinder(0.4, 0.7, 6, 5)
+
+
+        glColor3f(0.83, 1, 0.97)
+        self.applyParentTransform()
+        glTranslate( 0,  .7,  0)
+        glRotate(-90, 1, 0, 0)
+        glutSolidCylinder(0.4, 0.08, 6, 5)
 
 
 class BarrierObject(GameObject):
