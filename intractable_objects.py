@@ -25,7 +25,7 @@ def createMapObjects():
         LightingObject(90, 0, -9, rotY=-90),
         LightingObject(-5, 0, -45, rotY=90),
         LightingObject(-27, 0, -45, rotY=90),
-        LightingObject(-40, 0, -45, rotY=1),
+        LightingObject(-40, 0, -45, rotY=90),
         LightingObject(-90, 0, -45, rotY=90),
         LightingObject(5, 0, -45, rotY=90),
         LightingObject(29, 0, -45, rotY=90),
