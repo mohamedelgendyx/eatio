@@ -42,7 +42,6 @@ def draw():
     currentTime = newTime
     deltaTime = frameTime
 
-    # Speed Factor
     deltaTime *= GAME_SPEED_FACTOR
 
     global currentGameStatus
