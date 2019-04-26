@@ -1,19 +1,16 @@
-from objects.CarObject import Car1, startCycle_1, startCycle_2
+from objects.CarObject import *
 from objects.CharacterObject import CharacterObject
-from objects.HomeObject import HomeObject_3, HomeObject_2, HomeObject_1
-from objects.StreetObject import LightingObject, TrafficlightsObject, CylinderObject_1, CylinderObject_2, ConeObject, BarrierObject
+from objects.HomeObject import HomeObject_3, HomeObject_2, HomeObject_1, HomeObject_4, HomeObject_5, HomeObject_6
+from objects.StreetObject import *
 
 p = CharacterObject(0, 0, -2)
-c1 = Car1(0, 0, 0)
-c2 = Car1(0, 0, 0)
-c3 = Car1(0, 0, 0)
-c4 = Car1(0, 0, 0)
+c1 = Car1(0, 5, -1)
 h1 = HomeObject_3(0, 0, 0, rotY=90)
 
 
 def createMapObjects():
     objs = [
-        p, c1, c2, c3, c4,
+
         # lighting
         LightingObject(-5, 0, -9, rotY=-90),
         LightingObject(-27, 0, -9, rotY=-90),
@@ -125,6 +122,7 @@ def createMapObjects():
         CylinderObject_1(25.5, 0, -45),
         CylinderObject_1(89, 0, -45),
         CylinderObject_1(88, 0, -45),
+        CylinderObject_1(88.5, 0, -45),
         CylinderObject_1(87.5, 0, -45),
         CylinderObject_1(-89, 0, -55),
         CylinderObject_1(-88.5, 0, -55),
@@ -187,7 +185,25 @@ def createMapObjects():
         ConeObject(14, 0, -30),
         ConeObject(14, 0, -35),
         # barrier
+        BarrierObject(-45, 0, -8),
         BarrierObject(-47.5, 0, -8),
+        BarrierObject(-50, 0, -8),
+        BarrierObject(-52.5, 0, -8),
+        BarrierObject(-55, 0, -8),
+        BarrierObject(-57.5, 0, -8),
+        BarrierObject(-60, 0, -8),
+        BarrierObject(-62.5, 0, -8),
+        BarrierObject(-65, 0, -8),
+        BarrierObject(-45, 0, -46),
+        BarrierObject(-47.5, 0, -46),
+        BarrierObject(-50, 0, -46),
+        BarrierObject(-52.5, 0, -46),
+        BarrierObject(-55, 0, -46),
+        BarrierObject(-57.5, 0, -46),
+        BarrierObject(-60, 0, -46),
+        BarrierObject(-62.5, 0, -46),
+        BarrierObject(-65, 0, -46),
+        BarrierObject(47, 0, -54),
         BarrierObject(49.5, 0, -54),
         BarrierObject(52, 0, -54),
         BarrierObject(54.5, 0, -54),
@@ -205,168 +221,165 @@ def createMapObjects():
         BarrierObject(62, 0, -92),
         BarrierObject(64.5, 0, -92),
         BarrierObject(67, 0, -92),
-        BarrierObject(47, 0, -54),
+
+        #Ice men
+        IceManObject(-25, 2, -42),
+        IceManObject(25, 2, -42),
+        IceManObject(-40, 2, -13),
+        IceManObject(-40, 2, -38),
+        IceManObject(-90, 2, -70.5),
+        IceManObject(-40, 2, -70.5),
+        IceManObject(-75, 2, -8),
+        IceManObject(-75, 2, -43),
+        IceManObject(-65, 2, -89),
+        IceManObject(0, 2, -89),
+        IceManObject(-65, 2, -54),
+        IceManObject(0, 2, -54),
+        IceManObject(40, 2, -70),
+        IceManObject(91, 2, -70),
+        IceManObject(40, 2, -25),
+        IceManObject(91, 2, -25),
+        #Trees
+        TreeObject(0, 2, -41),
+        TreeObject(-40, 2, -24.5),
+        TreeObject(-20, 2, -7),
+        TreeObject(20, 2, -7),
+        TreeObject(-40, 2, -57),
+        TreeObject(-40, 2, -82),
+        TreeObject(-20, 2, -54),
+        TreeObject(20, 2, -54),
+        TreeObject(-85, 2, -54),
+        TreeObject(-45, 2, -54),
+        TreeObject(-85, 2, -88),
+        TreeObject(-45, 2, -88),
+        TreeObject(-90, 2, -57),
+        TreeObject(-90, 2, -82),
+        TreeObject(-90, 2, -12),
+        TreeObject(-90, 2, -37),
+        TreeObject(-85, 2, -7),
+        TreeObject(-85, 2, -42),
+        TreeObject(43, 2, -7),
+        TreeObject(43, 2, -42),
+        TreeObject(40, 2, -12),
+        TreeObject(40, 2, -35),
+        TreeObject(87, 2, -7),
+        TreeObject(87, 2, -42),
+        TreeObject(90, 2, -12),
+        TreeObject(90, 2, -35),
+        TreeObject(87, 2, -54),
+        TreeObject(87, 2, -87),
+        TreeObject(90, 2, -58),
+        TreeObject(90, 2, -81),
+        TreeObject(40, 2, -58),
+        TreeObject(40, 2, -81),
+        # homes
+        # this is the rectangle of upper left -------
+        #HomeObject_5(0, 5.5, -10.1),
+
+        HomeObject_3(-80, 0, -85, rotY=90),
+        HomeObject_3(-80, 0, -73, rotY=90),
+        HomeObject_3(-80, 0, -61, rotY=90),
+        HomeObject_2(-68, 0, -85, rotY=180),
+        HomeObject_2(-68, 0, -80, rotY=180),
+        HomeObject_2(-68, 0, -75, rotY=180),
+        HomeObject_2(-68, 0, -70, rotY=180),
+        HomeObject_2(-68, 0, -65, rotY=180),
+        HomeObject_2(-60, 0, -85, rotY=180),
+        HomeObject_2(-60, 0, -80, rotY=180),
+        HomeObject_2(-60, 0, -75, rotY=180),
+        HomeObject_2(-60, 0, -70, rotY=180),
+        HomeObject_2(-60, 0, -65, rotY=180),
+        HomeObject_2(-52, 0, -85, rotY=180),
+        HomeObject_2(-52, 0, -80, rotY=180),
+        HomeObject_2(-52, 0, -75, rotY=180),
+        HomeObject_2(-52, 0, -70, rotY=180),
+        HomeObject_2(-52, 0, -65, rotY=180),
+        HomeObject_1(-44, 0, -83, rotY=180),
+        HomeObject_1(-44, 0, -75, rotY=180),
+        HomeObject_1(-44, 0, -67, rotY=180),
+        HomeObject_1(-44, 0, -60, rotY=180),
+        HomeObject_4(-24, 0, -83, rotY=180),
+        HomeObject_4(-24, 0, -75, rotY=180),
+        HomeObject_4(-24, 0, -67, rotY=180),
+        HomeObject_4(-24, 0, -60, rotY=180),
+        HomeObject_6(-6, 10, -85, rotY=180),
+        HomeObject_1(-5, 0, -85, rotY=180),
+        HomeObject_6(11, 10, -85, rotY=180),
+        HomeObject_1(13, 0, -85, rotY=180),
+        HomeObject_6(30, 10, -85, rotY=180),
+        HomeObject_6(-6, 10, -70, rotY=180),
+        HomeObject_1(-5, 0, -70, rotY=180),
+        HomeObject_6(11, 10, -70, rotY=180),
+        HomeObject_1(13, 0, -70, rotY=180),
+        HomeObject_6(30, 10, -70, rotY=180),
+        HomeObject_5(25, 4.4, -60, rotY=0),
+        HomeObject_5(20, 4.4, -60, rotY=0),
+        HomeObject_5(15, 4.4, -60, rotY=0),
+        HomeObject_5(10, 4.4, -60, rotY=0),
+        HomeObject_5(5, 4.4, -60, rotY=0),
+        HomeObject_5(0, 4.5, -60, rotY=0),
+        HomeObject_5(-5, 4.5, -60, rotY=0),
+        HomeObject_5(-10, 4.5, -60, rotY=0),
+        HomeObject_5(-15, 4.5, -60, rotY=0),
+        # this upper right corner besides the petch
+        HomeObject_2(75, 0, -85, rotY=90),
+        HomeObject_2(75, 0, -80, rotY=90),
+        HomeObject_2(75, 0, -75, rotY=90),
+        HomeObject_2(75, 0, -70, rotY=90),
+        HomeObject_2(75, 0, -65, rotY=90),
+        HomeObject_2(75, 0, -60, rotY=90),
+        HomeObject_5(80, 5.5, -85, rotY=90),
+        HomeObject_5(80, 5.5, -80, rotY=90),
+        HomeObject_5(80, 5.5, -75, rotY=90),
+        HomeObject_5(80, 5.5, -70, rotY=90),
+        HomeObject_5(80, 5.5, -65, rotY=90),
+        HomeObject_5(80, 5.5, -60, rotY=90),
+        HomeObject_1(86, 0, -85, rotY=-90),
+        HomeObject_1(86, 0, -80, rotY=-90),
+        HomeObject_1(86, 0, -75, rotY=-90),
+        HomeObject_1(86, 0, -70, rotY=-90),
+        HomeObject_1(86, 0, -65, rotY=-90),
+        HomeObject_1(86, 0, -60, rotY=-90),
+        # this is the rectangle of lower left -------
+        HomeObject_6(-83, 10, -30, rotY=90),
+        HomeObject_6(-83, 10, -20, rotY=90),
+        HomeObject_6(-83, 10, -10, rotY=90),
+        HomeObject_4(-73, 0, -35, rotY=270),
+        HomeObject_4(-73, 0, -25, rotY=270),
+        HomeObject_4(-73, 0, -15, rotY=270),
+        HomeObject_1(-40, 0, -18, rotY=270),
+        HomeObject_1(-40, 0, -25, rotY=270),
+        HomeObject_1(-40, 0, -32, rotY=270),
+        HomeObject_1(-40, 0, -39, rotY=270),
+        # this lower right corner
+        # HomeObject_3(74,0,-17,r=0,g=.3,b=.4),
+        HomeObject_3(85, 0, -17 - 13, r=0, g=.3, b=.4),
+        HomeObject_3(74, 0, -17 - 13, r=0, g=.3, b=.4),
+        HomeObject_3(63, 0, -17 - 13, r=0, g=.3, b=.4),
+        HomeObject_3(52, 0, -17 - 13, r=0, g=.3, b=.4),
+        # HomeObject_3(74,0,-17,r=0,g=.3,b=.4),
+        HomeObject_3(85, 0, -17 - 13, r=0, g=.3, b=.4),
+        HomeObject_3(74, 0, -17 - 13, r=0, g=.3, b=.4),
+        HomeObject_3(63, 0, -17 - 13, r=0, g=.3, b=.4),
+        HomeObject_3(52, 0, -17 - 13, r=0, g=.3, b=.4),
+        HomeObject_6(78, 9, -19),
+        HomeObject_6(68, 9, -19),
+        HomeObject_6(58, 9, -19),
+        HomeObject_6(48, 9, -19),
+        HomeObject_1(50, 0, -11, r1=0, g1=.5, b1=.5, r2=0, g2=1, b2=1, rotY=180),
+        HomeObject_1(58, 0, -11, r1=0, g1=.5, b1=.5, r2=0, g2=1, b2=1, rotY=180),
+        HomeObject_1(66, 0, -11, r1=0, g1=.5, b1=.5, r2=0, g2=1, b2=1, rotY=180),
+        HomeObject_1(74, 0, -11, r1=0, g1=.5, b1=.5, r2=0, g2=1, b2=1, rotY=180),
+        HomeObject_4(84, 0, -11, r=1, g=0, b=0, rotY=180),
+        HomeObject_1(42, 0, -14, r1=0, g1=.5, b1=.5, r2=0, g2=1, b2=1, rotY=90),
+        HomeObject_1(42, 0, -22, r1=0, g1=.5, b1=.5, r2=0, g2=1, b2=1, rotY=90),
+        HomeObject_1(42, 0, -30, r1=0, g1=.5, b1=.5, r2=0, g2=1, b2=1, rotY=90),
+        HomeObject_4(87, 0, -41, r=0, g=.4, b=0),
+        HomeObject_4(44, 0, -41, r=0, g=.4, b=0),
+        HomeObject_1(77, 0, -42, r1=0, g1=.5, b1=.5, r2=0, g2=1, b2=1, rotY=0),
+        HomeObject_4(66, 0, -41, r=1, g=0, b=0),
+        HomeObject_1(55, 0, -42),
+        # Staic cars of the park
     ]
     startCycle_1(c1)
-    startCycle_1(c2, 3)
-    startCycle_2(c3)
-    startCycle_2(c4, 3)
     return objs
-
-
-def draw_barriers():
-    b = []
-    for i in range(40):
-        b.append(BarrierObject(0, 0, 0))
-    b[0].posZ = -8
-    b[0].posX = -45
-    b[0].draw()
-
-    b[0].posZ = -8
-    b[0].posX = -47.5
-    b[0].draw()
-
-    b[2].posZ = -8
-    b[2].posX = -50
-    b[2].draw()
-
-    b[3].posZ = -8
-    b[3].posX = -52.5
-    b[3].draw()
-
-    b[4].posZ = -8
-    b[4].posX = -55
-    b[4].draw()
-
-    b[5].posZ = -8
-    b[5].posX = -57.5
-    b[5].draw()
-
-    b[6].posZ = -8
-    b[6].posX = -60
-    b[6].draw()
-
-    b[7].posZ = -8
-    b[7].posX = -62.5
-    b[7].draw()
-
-    b[8].posZ = -8
-    b[8].posX = -65
-    b[8].draw()
-
-    b[9].posZ = -46
-    b[9].posX = -45
-    b[9].draw()
-
-    b[10].posZ = -46
-    b[10].posX = -47.5
-    b[10].draw()
-
-    b[11].posZ = -46
-    b[11].posX = -50
-    b[11].draw()
-
-    b[12].posZ = -46
-    b[12].posX = -52.5
-    b[12].draw()
-
-    b[13].posZ = -46
-    b[13].posX = -55
-    b[13].draw()
-
-    b[14].posZ = -46
-    b[14].posX = -57.5
-    b[14].draw()
-
-    b[15].posZ = -46
-    b[15].posX = -60
-    b[15].draw()
-
-    b[16].posZ = -46
-    b[16].posX = -62.5
-    b[16].draw()
-
-    b[17].posZ = -46
-    b[17].posX = -65
-    b[17].draw()
-
-    b[18].posZ = -54
-    b[18].posX = 47
-    b[18].draw()
-
-    b[1].posZ = -54
-    b[1].posX = 49.5
-    b[1].draw()
-
-    b[2].posZ = -54
-    b[2].posX = 52
-    b[2].draw()
-
-    b[3].posZ = -54
-    b[3].posX = 54.5
-    b[3].draw()
-
-    b[4].posZ = -54
-    b[4].posX = 57
-    b[4].draw()
-
-    b[5].posZ = -54
-    b[5].posX = 59.5
-    b[5].draw()
-
-    b[6].posZ = -54
-    b[6].posX = 62
-    b[6].draw()
-
-    b[7].posZ = -54
-    b[7].posX = 64.5
-    b[7].draw()
-
-    b[8].posZ = -54
-    b[8].posX = 67
-    b[8].draw()
-
-    b[9].posZ = -92
-    b[9].posX = 47
-    b[9].draw()
-
-    b[10].posZ = -92
-    b[10].posX = 49.5
-    b[10].draw()
-
-    b[11].posZ = -92
-    b[11].posX = 52
-    b[11].draw()
-
-    b[12].posZ = -92
-    b[12].posX = 54.5
-    b[12].draw()
-
-    b[13].posZ = -92
-    b[13].posX = 57
-    b[13].draw()
-
-    b[14].posZ = -92
-    b[14].posX = 59.5
-    b[14].draw()
-
-    b[15].posZ = -92
-    b[15].posX = 62
-    b[15].draw()
-
-    b[16].posZ = -92
-    b[16].posX = 64.5
-    b[16].draw()
-
-    b[17].posZ = -92
-    b[17].posX = 67
-    b[17].draw()
-    print("###################################")
-    for i in b:
-        print("BarrierObject(", end='')
-        print(i.posX, end='')
-        print(",0,", end='')
-        print(i.posZ, end='')
-        print(")")
-    print("###################################")
-    return b
