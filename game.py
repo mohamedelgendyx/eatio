@@ -1,0 +1,178 @@
+from time import time
+from CollisionDetection import test_cu
+from OpenGL.GLU import *
+from OpenGL.GLUT import *
+
+from MainMap import drawMap
+from gameobject import *
+from gamestatus import *
+from gametextures import drawImage2D, drawText2D
+from initopengl import initOpenGl
+from intractable_objects import createMapObjects
+from objects.PlayerObject import *
+
+deltaTime = 0
+currentTime = 0
+
+currentGameStatus = 0
+currentGameScore = 1997
+intractableObjects = []
+player = PlayerObject()
+cameraZoom = 0
+def initCamera():
+    global player, cameraZoom
+    glMatrixMode(GL_PROJECTION)
+    glLoadIdentity()
+    gluPerspective(60, 1, 0.001, 100000)
+    gluLookAt(player.posX + 0, 10 + cameraZoom, player.posZ + 10 + cameraZoom,
+              player.posX + 0, 0, player.posZ + 0,
+              0, 1, 0)
+    glMatrixMode(GL_MODELVIEW)
+
+
+def draw():
+    # Delta Time
+    global currentTime
+    global deltaTime
+    newTime = time()
+    frameTime = newTime - currentTime
+    currentTime = newTime
+    deltaTime = frameTime
+
+    # Speed Factor
+    deltaTime *= GAME_SPEED_FACTOR
+
+    global currentGameStatus
+    global currentGameScore
+
+    glClearColor(0,0.49,0.76, 1)
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    glColor3f(0, 0, 1)
+    glLoadIdentity()
+
+    if currentGameStatus >= GAME_STATUS_SCORE:
+        glMatrixMode(GL_PROJECTION)
+        glLoadIdentity()
+        gluOrtho2D(-5, 5, -5, 5)
+        glMatrixMode(GL_MODELVIEW)
+        drawImage2D("resources/images/score_title.png", 0, 2.5)
+        drawText2D(str(currentGameScore), 0, -1, scaleFactor=1)
+
+    if GAME_STATUS_PLAYING < currentGameStatus < GAME_STATUS_SCORE:
+        global intractableObjects
+        initCamera()
+        glLoadIdentity()
+
+        glDisable(GL_BLEND)
+        glDisable(GL_DEPTH_TEST)
+        glDisable(GL_CULL_FACE)
+        drawMap()
+        glLoadIdentity()
+        glEnable(GL_BLEND)
+        glEnable(GL_CULL_FACE)
+        glEnable(GL_DEPTH_TEST)
+        glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA)
+        player.onFrameTick(deltaTime)
+        player.draw()
+        draw_others()
+        for i in intractableObjects:
+          if i.rotY == 90 or  i.rotY == -90:
+                      if test_cu(player.radius, player.posX, player.posZ, i.width , i.Length, i.posX,i.posZ) == True:
+                          i.a = 0.4
+                          i.posY-=0.2
+                      else:
+                          i.a = 1
+          else:
+              if test_cu(player.radius, player.posX, player.posZ, i.Length, i.width, i.posX, i.posZ) == True:
+                  i.a = 0.4
+                  i.posY -= 0.2
+              else:
+                  i.a = 1
+        for o in intractableObjects:
+            o.onFrameTick(deltaTime)
+            o.draw()
+        # p.onFrameTick(deltaTime)
+        # p.draw()
+
+
+    if GAME_STATUS_COUNTDOWN <= currentGameStatus < GAME_STATUS_PLAYING:
+        glMatrixMode(GL_PROJECTION)
+        glLoadIdentity()
+        gluOrtho2D(-5, 5, -5, 5)
+        glMatrixMode(GL_MODELVIEW)
+
+    if currentGameStatus == GAME_STATUS_MAINMENU:
+        glClearColor(0,0,0,1)
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+        glMatrixMode(GL_PROJECTION)
+        glLoadIdentity()
+        gluOrtho2D(-5, 5, -5, 5)
+        glMatrixMode(GL_MODELVIEW)
+        drawText2D("CLICK TO PLAY !", 0, 0, scaleFactor=0.5)
+
+    if not currentGameStatus == GAME_STATUS_MAINMENU:
+        currentGameStatus += deltaTime*6
+
+    glutSwapBuffers()
+
+
+def onKeyboardKeyDown(key, x, y):
+    global currentGameStatus
+    if key == b'r':
+        print('Restarting the game..')
+        currentGameStatus = GAME_STATUS_MAINMENU
+
+    if key == b'p':
+        print('Player position : ', end='')
+        print(player.posX, end='')
+        print(player.posZ)
+
+    global cameraZoom
+    if key == b'[':
+        cameraZoom += 5
+    if key == b']':
+        cameraZoom -= 5
+
+
+def onSpecialKeyDown(key, x, y):
+    global player
+    global angle
+    if key == GLUT_KEY_RIGHT:
+
+        if player.posX < 100-player.radius:
+            player.posX += 1
+        player.rotY = 90
+        player.x = player.radius +.2
+        player.z = 0
+
+
+    elif key == GLUT_KEY_LEFT:
+        if player.posX > -100 +player.radius:
+            player.posX -= 1
+        player.rotY = -90
+        player.x = -player.radius-.2
+        player.z = 0
+
+    elif key == GLUT_KEY_DOWN:
+        if player.posZ < -player.radius:
+            player.posZ += 1
+        player.rotY = 0
+        player.z = player.radius+.2
+        player.x = 0
+    elif key == GLUT_KEY_UP:
+
+        if player.posZ > -100+player.radius:
+            player.posZ -= 1
+        player.rotY = 180
+        player.z = - player.radius-.2
+        player.x = 0
+def onMouseKeyDown(button, state, x, y):
+    global currentGameStatus
+
+    if button == GLUT_LEFT_BUTTON and currentGameStatus == GAME_STATUS_MAINMENU:
+        currentGameStatus = GAME_STATUS_COUNTDOWN
+        global intractableObjects
+        intractableObjects = createMapObjects()
+
+
+initOpenGl(draw, onMouseKeyDown, onKeyboardKeyDown, onSpecialKeyDown)
