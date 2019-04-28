@@ -10,6 +10,34 @@ h1 = HomeObject_3(0, 0, 0, rotY=90)
 
 def createMapObjects():
     objs = [
+        
+        # characterObjects
+        CharacterObject(-48, 0, -34, r=143, g=54, b=137),
+        CharacterObject(-53, 0, -18, r=159, g=60, b=82),
+        CharacterObject(-55, 0, -26, r=143, g=54, b=137),
+        CharacterObject(-52, 0, -39, r=159, g=60, b=82),
+        CharacterObject(-60, 0, -29, r=27, g=95, b=147),
+        CharacterObject(-48, 0, -13, r=143, g=54, b=137),
+        CharacterObject(-57, 0, -16, r=27, g=95, b=147),
+        CharacterObject(-62, 0, -41, r=39, g=40, b=42),
+        CharacterObject(-63, 0, -13, r=39, g=40, b=42),
+        CharacterObject(-60, 0, -21, r=39, g=40, b=42),
+        CharacterObject(-48, 0, -22, r=27, g=95, b=147),
+        CharacterObject(-55, 0, -11, r=159, g=60, b=82),
+        CharacterObject(-56, 0, -35, r=39, g=40, b=42),
+
+        CharacterObject(50, 0, -78, r=143, g=54, b=137),
+        CharacterObject(55, 0, -70, r=159, g=60, b=82),
+        CharacterObject(49, 0, -86, r=27, g=95, b=147),
+        CharacterObject(54, 0, -83, r=159, g=60, b=82),
+        CharacterObject(62, 0, -73, r=27, g=95, b=147),
+        CharacterObject(49, 0, -60, r=143, g=54, b=137),
+        CharacterObject(58, 0, -59, r=27, g=95, b=147),
+        CharacterObject(64, 0, -85, r=39, g=40, b=42),
+        CharacterObject(65, 0, -57, r=39, g=40, b=42),
+        CharacterObject(62, 0, -65, r=143, g=54, b=137),
+        CharacterObject(51, 0, -66, r=27, g=95, b=147),
+        CharacterObject(58, 0, -79, r=39, g=40, b=42),
 
         # lighting
         LightingObject(-5, 0, -9, rotY=-90),
