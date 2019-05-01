@@ -57,7 +57,7 @@ def drawImage2D(filename, x, y, tintColorR=1, tintColorG=1, tintColorB=1, scaleF
 font = None
 
 
-def drawText2D(text, x, y, tintColorR=1, tintColorG=1, tintColorB=1, scaleFactor=1):
+def drawText2D(text, x, y,z=0, tintColorR=1, tintColorG=1, tintColorB=1, scaleFactor=1):
     glLoadIdentity()
     global font
     if font is None:
@@ -91,7 +91,7 @@ def drawText2D(text, x, y, tintColorR=1, tintColorG=1, tintColorB=1, scaleFactor
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
 
-    glTranslate(x, y, 0)
+    glTranslate(x, y, z)
     glScale(scaleFactor, scaleFactor, 1)
     widthToHeight = (width / height)
     glColor3f(tintColorR, tintColorG, tintColorB)
