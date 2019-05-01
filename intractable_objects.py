@@ -3,18 +3,44 @@ from objects.CharacterObject import CharacterObject
 from objects.HomeObject import HomeObject_3, HomeObject_2, HomeObject_1, HomeObject_4, HomeObject_5, HomeObject_6
 from objects.StreetObject import *
 
-p = CharacterObject(0, 0, -2)
-c1 = Car1(0, 1, -1)
-h1 = HomeObject_3(0, 0, 0, rotY=90)
-
 
 def createMapObjects():
     objs = [
-        c1,
-        Car1(0,1,0),
+        # Moving Cars
+        Car1(0, 1, -1),
+        Car1(0, 1, 0),
         CarTaxi(-31,1,0),
         CarPolice(33,0,0),
         Car_bus(0,1,-10),
+
+        # characterObjects
+        CharacterObject(-48, 0, -34, r=143, g=54, b=137),
+        CharacterObject(-53, 0, -18, r=159, g=60, b=82),
+        CharacterObject(-55, 0, -26, r=143, g=54, b=137),
+        CharacterObject(-52, 0, -39, r=159, g=60, b=82),
+        CharacterObject(-60, 0, -29, r=27, g=95, b=147),
+        CharacterObject(-48, 0, -13, r=143, g=54, b=137),
+        CharacterObject(-57, 0, -16, r=27, g=95, b=147),
+        CharacterObject(-62, 0, -41, r=39, g=40, b=42),
+        CharacterObject(-63, 0, -13, r=39, g=40, b=42),
+        CharacterObject(-60, 0, -21, r=39, g=40, b=42),
+        CharacterObject(-48, 0, -22, r=27, g=95, b=147),
+        CharacterObject(-55, 0, -11, r=159, g=60, b=82),
+        CharacterObject(-56, 0, -35, r=39, g=40, b=42),
+
+        CharacterObject(50, 0, -78, r=143, g=54, b=137),
+        CharacterObject(55, 0, -70, r=159, g=60, b=82),
+        CharacterObject(49, 0, -86, r=27, g=95, b=147),
+        CharacterObject(54, 0, -83, r=159, g=60, b=82),
+        CharacterObject(62, 0, -73, r=27, g=95, b=147),
+        CharacterObject(49, 0, -60, r=143, g=54, b=137),
+        CharacterObject(58, 0, -59, r=27, g=95, b=147),
+        CharacterObject(64, 0, -85, r=39, g=40, b=42),
+        CharacterObject(65, 0, -57, r=39, g=40, b=42),
+        CharacterObject(62, 0, -65, r=143, g=54, b=137),
+        CharacterObject(51, 0, -66, r=27, g=95, b=147),
+        CharacterObject(58, 0, -79, r=39, g=40, b=42),
+
         # lighting
         LightingObject(-5, 0, -9, rotY=-90),
         LightingObject(-27, 0, -9, rotY=-90),
@@ -70,6 +96,7 @@ def createMapObjects():
         LightingObject(-28.5, 0, -43, rotY=-180),
         LightingObject(-28.5, 0, -57, rotY=-180),
         LightingObject(-28.5, 0, -88, rotY=-180),
+
         # traficlights
         TrafficlightsObject(30.5, 0, -9.5, rotY=0),
         TrafficlightsObject(30.5, 0, -45, rotY=0),
@@ -95,6 +122,7 @@ def createMapObjects():
         TrafficlightsObject(-91.5, 0, -45, rotY=180),
         TrafficlightsObject(-91.5, 0, -55, rotY=180),
         TrafficlightsObject(-91.5, 0, -90, rotY=180),
+
         # cylinders_1
         CylinderObject_1(-89, 0, -9),
         CylinderObject_1(-88.5, 0, -9),
@@ -160,6 +188,7 @@ def createMapObjects():
         CylinderObject_1(88.5, 0, -91),
         CylinderObject_1(88, 0, -91),
         CylinderObject_1(87.5, 0, -91),
+
         # cylinders_2
         CylinderObject_2(-7, 0, -9),
         CylinderObject_2(7, 0, -9),
@@ -176,6 +205,7 @@ def createMapObjects():
         CylinderObject_2(7, 0, -91),
         CylinderObject_2(-85, 0, -91),
         CylinderObject_2(85, 0, -91),
+
         # cones
         ConeObject(0, 0, -9),
         ConeObject(-14, 0, -15),
@@ -188,6 +218,7 @@ def createMapObjects():
         ConeObject(14, 0, -25),
         ConeObject(14, 0, -30),
         ConeObject(14, 0, -35),
+
         # barrier
         BarrierObject(-45, 0, -8),
         BarrierObject(-47.5, 0, -8),
@@ -242,6 +273,7 @@ def createMapObjects():
         IceManObject(91, .5, -70),
         IceManObject(40, .5, -25),
         IceManObject(91, .5, -25),
+
         #Trees
         TreeObject(0, .5, -41),
         TreeObject(-20, .5, -7),
@@ -274,6 +306,7 @@ def createMapObjects():
         TreeObject(90, .5, -81),
         TreeObject(40, .5, -58),
         TreeObject(40, .5, -81),
+
         # homes
         # this is the rectangle of upper left -------
         HomeObject_3(-80, 0, -90, rotY=90),
@@ -322,8 +355,7 @@ def createMapObjects():
         HomeObject_5(-10, 4.5, -60, rotY=0),
         HomeObject_5(-15, 4.5, -60, rotY=0),
 
-        # this upper right corner besides the petch
-
+        # this upper right corner besides the beach -----
         HomeObject_2(75, 0, -85, rotY=90),
         HomeObject_2(75, 0, -80, rotY=90),
         HomeObject_2(75, 0, -75, rotY=90),
@@ -368,7 +400,6 @@ def createMapObjects():
         HomeObject_3(74, 0, -17 - 13, r=0, g=.3, b=.4),
         HomeObject_3(63, 0, -17 - 13, r=0, g=.3, b=.4),
         HomeObject_3(52, 0, -17 - 13, r=0, g=.3, b=.4),
-
         HomeObject_6(84, 8.2, -19),
         HomeObject_6(74, 8.2, -19),
         HomeObject_6(64, 8.2, -19),
@@ -387,7 +418,8 @@ def createMapObjects():
         HomeObject_1(77, 0, -42, r1=0, g1=.5, b1=.5, r2=0, g2=1, b2=1, rotY=0),
         HomeObject_4(66, 0, -41, r=1, g=0, b=0),
         HomeObject_1(55, 0, -42),
-        # Staic cars of the park
+
+        # Static cars of the park
         Car2(22.5, 1, -12.3,rotY=90),
         Car2(28, 1, -22,rotY=90),
         Car2(17, 1, -22,rotY=90),
@@ -412,7 +444,7 @@ def createMapObjects():
         Car1(-27, 1, -28.5,rotY=90),
         Car1(-16, 1, -28.5,rotY=90),
     ]
-    startCycle_1(c1)
+    startCycle_1(objs[0])
     startCycle_2(objs[1])
     Straight(objs[2])
     Straight(objs[3])
