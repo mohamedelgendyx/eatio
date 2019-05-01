@@ -1,5 +1,8 @@
 from time import time
 from CollisionDetection import testCube
+from OpenGL.GLU import *
+from OpenGL.GLUT import *
+
 from MainMap import drawMap
 from gamestatus import *
 from gametextures import drawImage2D, drawText2D
