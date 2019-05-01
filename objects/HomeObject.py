@@ -1,9 +1,5 @@
-from OpenGL.GL import *
-from OpenGL.GLU import *
 from OpenGL.GLUT import *
 import numpy as np
-from math import *
-from random import *
 from gameobject import *
 
 
@@ -20,6 +16,7 @@ class HomeObject_1(GameObject):
         self.a=al
         self.Length=5
         self.width=4
+        self.area =20
 
 
     def block(self, r, b, g, x, y, z, s1, s2, s3, l,a):
@@ -28,6 +25,7 @@ class HomeObject_1(GameObject):
         glTranslate(x, y, z)
         glScale(s1, s2, s3)
         glutSolidCube(l)
+ 
     def draw(self):
         self.block(self.r1, self.g1, self.b1, 0, .2, 0, 1, .2, 1, 2,a=self.a)
         self.block(self.r2, self.g2, self.b2, 0, 1.2+.2, 0, 1, 1, 1, 2,a=self.a)
@@ -44,6 +42,7 @@ class HomeObject_2(GameObject):
         self.Length=3.5
         self.width=5.95
         self.a=al
+        self.area =20.825
 
     def block(self, r, b, g, x, y, z, s1, s2, s3, l,a):
         self.applyParentTransform()
@@ -60,7 +59,8 @@ class HomeObject_2(GameObject):
         self.block(1, 1, 1, 3.3, 8.57+1.8, -1.6, 1, 28, 1, .5,a=self.a)  # Left white part
         self.block(.25, .25, .25, 0, .7+1.8, -1.79, 1, 4, 0, 1,a=self.a)  # door
 
-        for i in np.arange(2.3, 13.8, 2.3):  # windows
+        # windows
+        for i in np.arange(2.3, 13.8, 2.3):  
             self.block(.25, .25, .25, 1.16, 2+1.8, -1.79, 1, 2, 0, 1,a=self.a)
             self.block(.25, .25, .25, 1.16, 2+1.8 + i, -1.79, 1, 2, 0, 1,a=self.a)
 
@@ -84,7 +84,8 @@ class HomeObject_3(GameObject):
         self.a=al
         self.Length=9
         self.width=9
-
+        self.area =81
+        
     def block(self, r, b, g, x, y, z, s1, s2, s3, l,a):
         self.applyParentTransform()
         glColor4f(r, b, g, a)
@@ -94,7 +95,9 @@ class HomeObject_3(GameObject):
 
     def draw(self):
         self.block(self.r, self.g, self.b, 0, 18, 0, 1, 4, 1, 9,a=self.a)
-        for i in np.arange(0, 29, 4):  # windows
+
+        # windows
+        for i in np.arange(0, 29, 4):
             self.block(.25, .25, .25, 0, -12+18+i, 0, .85, .3, 1.001, 9,a=self.a)
             self.block(.25, .25, .25, 4.55, -12+18+i, 0, 0, .3, .85, 9,a=self.a)
             self.block(.25, .25, .25, -4.55, -12+18+i , 0, 0, .3, .85, 9,a=self.a)
@@ -110,6 +113,7 @@ class HomeObject_4(GameObject):
         self.a=al
         self.Length=5
         self.width=5
+        self.area = 25
 
     def block(self, r, b, g, x, y, z, s1, s2, s3, l,a):
         self.applyParentTransform()
@@ -132,12 +136,15 @@ class HomeObject_5(GameObject):
         self.Length=3.8
         self.width=4
         self.a=al
+        self.area = 15.2
+        
     def block(self, r, b, g, x, y, z, s1, s2, s3, l,a):
         self.applyParentTransform()
         glColor4f(r, b, g,a)
         glTranslate(x, y, z)
         glScale(s1, s2, s3)
         glutSolidCube(l)
+        
     def draw(self):
         self.block(0.4, 0.1, 0.4, 0, 0, 0, 1, 2, 1, 4,a=self.a)
         self.block(1, 0.6, 0, 0, 0, 2.1, 3.7, .5, 0, 1,a=self.a)
@@ -154,30 +161,30 @@ class HomeObject_5(GameObject):
 class HomeObject_6(GameObject):
             def __init__(self, posX, posY, posZ, scaleX=1, scaleY=1, scaleZ=1, rotY=0,al=1):
                 super().__init__(posX, posY, posZ, scaleX, scaleY, scaleZ, rotY)
-                self.Length = 4
-                self.width = 4
+                self.Length = 8.000008
+                self.width = 8.000008
                 self.a=al
+                self.area = 64
+        
             def block(self, r, b, g, x, y, z, s1, s2, s3, l,a):
                 self.applyParentTransform()
                 glColor4f(r, b, g,a)
-
                 glTranslate(x, y, z)
                 glScale(s1, s2, s3)
                 glutSolidCube(l)
+        
             def draw(self):
-                self.block(0, 0, 0, 7.5, 0, 0, 2, 4.5, 2, 4,a=self.a)
-                for i in np.arange(0, -15, -3.2):
-                    self.block(0.4, 0.2, 0.9, 10.65, 7.5, 0, .75, 1.5, 4.001, 2,a=self.a)
-                    self.block(0.4, 0.2, 0.9, 10.65, 7.5 + i, 0, .75, 1.5, 4.001, 2,a=self.a)
-                for i in np.arange(0, -15, -3.2):
-                    self.block(0.4, 0.2, 0.9, 9, 7.5, 0, .75, 1.5, 4.001, 2,a=self.a)
-                    self.block(0.4, 0.2, 0.9, 9, 7.5 + i, 0, .75, 1.5, 4.001, 2,a=self.a)
-                for i in np.arange(0, -15, -3.2):
-                    self.block(0.4, 0.2, 0.9, 7.35, 7.5, 0, .75, 1.5, 4.001, 2,a=self.a)
-                    self.block(0.4, 0.2, 0.9, 7.35, 7.5 + i, 0, .75, 1.5, 4.001, 2,a=self.a)
-                for i in np.arange(0, -15, -3.2):
-                    self.block(0.4, 0.2, 0.9, 5.7, 7.5, 0, .75, 1.5, 4.001, 2,a=self.a)
-                    self.block(0.4, 0.2, 0.9, 5.7, 7.5 + i, 0, .75, 1.5, 4.001, 2,a=self.a)
-                for i in np.arange(0, -15, -3.2):
-                    self.block(0.4, 0.2, 0.9, 4.2, 7.5, 0, .55, 1.5, 4.001, 2,a=self.a)
-                    self.block(0.4, 0.2, 0.9, 4.2, 7.5 + i, 0, .55, 1.5, 4.001, 2,a=self.a)
+                self.block(0, 0, 0,0, 5.2, 0,8.000008, .25, 8.00008,1,a=self.a)
+                self.block(0,0,0,0, 2.5, 0,8.000008, .25, 8.00008,1,a=self.a)
+                self.block(0, 0, 0,0, -.2, 0,8.000008, .25, 8.00008,1,a=self.a)
+                self.block(0, 0, 0,0, -2.7, 0,8.000008, .25, 8.00008,1,a=self.a)
+                self.block(0, 0, 0,0, 8, 0,8.000008, .25, 8.00008,1,a=self.a)
+                self.block(0, 0, 0,0, -5.2, 0,8.000008, .25, 8.00008,1,a=self.a)
+                self.block(0, 0, 0,0, -8, 0,8.000008, .25, 8.00008,1,a=self.a)
+                self.block(0, 0, 0,2, 0, 0,.125, 16, 8,1,a=self.a)
+                self.block(0, 0, 0,0, 0, 0,.125, 16, 8,1,a=self.a)
+                self.block(0, 0, 0,-2, 0, 0,.125, 16, 8,1,a=self.a)
+                self.block(0, 0, 0,0, 0, 2,8, 16, .125,1,a=self.a)
+                self.block(0, 0, 0,0, 0, 0,8, 16, .125,1,a=self.a)
+                self.block(0, 0, 0,0, 0, -2,8, 16, .125,1,a=self.a)
+                self.block(0.4, 0.2, 0.9,0, 0, 0,2, 4, 2,4,a=self.a)
