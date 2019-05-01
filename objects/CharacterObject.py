@@ -6,13 +6,14 @@ class CharacterObject(GameObject):
 
     def __init__(self, posX, posY, posZ, scaleX=1, scaleY=1, scaleZ=1, rotY=0, r=0, g=0, b=0):
         super().__init__(posX, posY, posZ, scaleX, scaleY, scaleZ, rotY)
-        self.Length=0
-        self.width=0
+        self.Length = 0
+        self.width = 0
+        self.area = 2
         self.HeadDeltaY = 0
         self.HeadUpDown = 1
-        self.r=r/255
-        self.g=g/255
-        self.b=b/255
+        self.r = r/255
+        self.g = g/255
+        self.b = b/255
 
     def draw(self):
         self.applyParentTransform()
