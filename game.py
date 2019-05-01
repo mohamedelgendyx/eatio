@@ -10,6 +10,7 @@ from initopengl import initOpenGl
 from intractable_objects import createMapObjects
 from objects.PlayerObject import *
 
+cameraZoom = 0
 deltaTime = 0
 currentTime = 0
 intractableObjects = []
@@ -20,7 +21,7 @@ def initCamera():
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
     gluPerspective(60, 1, 0.001, 100000)
-    gluLookAt(player.posX + 0, 15 + cameraZoom, player.posZ + 20 + cameraZoom,
+    gluLookAt(player.posX + 0, 10 + cameraZoom, player.posZ + 10 + cameraZoom,
               player.posX + 0, 0, player.posZ + 0,
               0, 1, 0)
     glMatrixMode(GL_MODELVIEW)
@@ -29,6 +30,7 @@ def initCamera():
 def draw():
 
     # Delta Time
+    global cameraZoom
     global currentTime
     global deltaTime
     newTime = time()
@@ -54,7 +56,7 @@ def draw():
         gluOrtho2D(-5, 5, -5, 5)
         glMatrixMode(GL_MODELVIEW)
         drawImage2D("resources/images/score_title.png", 0, 2.5)
-        drawText2D(str(currentGameScore), 0, -1, scaleFactor=1)
+        drawText2D(str(round(currentGameScore)), 0, -1, scaleFactor=1)
     if GAME_STATUS_PLAYING < currentGameStatus < GAME_STATUS_SCORE:
         global intractableObjects
         initCamera()
@@ -81,7 +83,7 @@ def draw():
                             #i.startAnimation(DeltaAnimation( AnimationParams.posY , - 5 ,50,onAnimationFinished=intractableObjects.remove(i) ))
                             i.startAnimation(DeltaAnimation(AnimationParams.posX, 5, 10, onAnimationFinished=intractableObjects.remove(i) ))
                             i.startAnimation(DeltaAnimation(AnimationParams.posZ, None, player.posZ, 1 ))
-                            currentGameScore+=i.area/AREA_TO_SCORE
+                            currentGameScore+=i.area//AREA_TO_SCORE
                             #print(currentGameScore)
                       else:
                           i.a =1
@@ -93,7 +95,7 @@ def draw():
                           i.startAnimation(Animation(AnimationParams.posX ,None , player.posX ,1, onAnimationFinished=intractableObjects.remove(i)))
                           i.startAnimation(Animation(AnimationParams.posZ ,None ,player.posZ ,1))
                           #i.startAnimation(DeltaAnimation(AnimationParams.posY, - 5, 50,  onAnimationFinished=intractableObjects.remove(i)))
-                          currentGameScore += i.area / AREA_TO_SCORE
+                          currentGameScore += i.area // AREA_TO_SCORE
                           print(currentGameScore)
 
 
@@ -102,7 +104,8 @@ def draw():
         for o in intractableObjects:
             o.onFrameTick(deltaTime)
             o.draw()
-        Score_update(currentGameScore)
+        if Score_update(currentGameScore):
+            cameraZoom+=5
 
     if GAME_STATUS_COUNTDOWN <= currentGameStatus < GAME_STATUS_PLAYING:
         glClearColor(0, 0 , 0 , 1 )
