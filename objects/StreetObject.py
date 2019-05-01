@@ -1,9 +1,4 @@
-from OpenGL.GL import *
-from OpenGL.GLU import *
 from OpenGL.GLUT import *
-import numpy as np
-from math import *
-from random import *
 from gameobject import *
 
 
@@ -14,6 +9,7 @@ class LightingObject(GameObject):
         self.Length =0
         self.width=0
         self.a=al
+        self.area=2
 
     def draw(self):
         self.applyParentTransform()
@@ -43,6 +39,7 @@ class ConeObject(GameObject):
         super().__init__(posX, posY, posZ, scaleX, scaleY, scaleZ, rotY)
         self.Length =0
         self.width=0
+        self.area=2
 
     def draw(self):
         glColor3f(0.99, 0.6, 0.1)
@@ -61,6 +58,7 @@ class CylinderObject_1(GameObject):
         super().__init__(posX, posY, posZ, scaleX, scaleY, scaleZ, rotY)
         self.Length =0
         self.width=0
+        self.area=2
 
     def draw(self):
         self.applyParentTransform()
@@ -74,6 +72,7 @@ class CylinderObject_2(GameObject):
         super().__init__(posX, posY, posZ, scaleX, scaleY, scaleZ, rotY)
         self.Length =0
         self.width=0
+        self.area=2
 
     def draw(self):
         glColor3f(0.36, 0.59, 0.23)
@@ -94,6 +93,7 @@ class BarrierObject(GameObject):
         super().__init__(posX, posY, posZ, scaleX, scaleY, scaleZ, rotY)
         self.Length =0
         self.width=0
+        self.area=2
 
     def draw(self):
         glColor3f(0.38, 0.58, 0.76)
@@ -150,7 +150,7 @@ class TrafficlightsObject(GameObject):
         super().__init__(posX, posY, posZ, scaleX, scaleY, scaleZ, rotY)
         self.Length =0
         self.width=0
-
+        self.area=2
     def draw(self):
         glColor3f(0.38, 0.58, 0.76)
         self.applyParentTransform()
@@ -191,6 +191,7 @@ class IceManObject(GameObject):
         super().__init__(posX, posY, posZ, scaleX, scaleY, scaleZ, rotY)
         self.Length =0
         self.width=0
+        self.area=2
     def draw(self):
         self.applyParentTransform()
         glColor3f(0.93359,0.9492,0.984375) #Base_Sphere
@@ -217,11 +218,13 @@ class IceManObject(GameObject):
         glTranslate(1.2, 2.3, 0)
         glRotate(90, 0, 1, 0)
         glutSolidCone(0.2, 0.7, 10, 10)
+
 class TreeObject(GameObject):
     def __init__(self, posX, posY, posZ, scaleX=1, scaleY=1, scaleZ=1, rotY=0):
         super().__init__(posX, posY, posZ, scaleX, scaleY, scaleZ, rotY)
         self.Length =0
         self.width=0
+        self.area=2
     def draw(self):
         self.applyParentTransform()
         glColor3f(0.64843,0.4140625,0.26953125)
