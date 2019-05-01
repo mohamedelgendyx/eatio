@@ -3,14 +3,16 @@ from objects.CharacterObject import CharacterObject
 from objects.HomeObject import HomeObject_3, HomeObject_2, HomeObject_1, HomeObject_4, HomeObject_5, HomeObject_6
 from objects.StreetObject import *
 
-p = CharacterObject(0, 0, -2)
-c1 = Car1(0, 5, -1)
-h1 = HomeObject_3(0, 0, 0, rotY=90)
-
 
 def createMapObjects():
     objs = [
-        
+        # Moving Cars
+        Car1(0, 1, -1),
+        Car1(0, 1, 0),
+        CarTaxi(-31,1,0),
+        CarPolice(33,0,0),
+        Car_bus(0,1,-10),
+
         # characterObjects
         CharacterObject(-48, 0, -34, r=143, g=54, b=137),
         CharacterObject(-53, 0, -18, r=159, g=60, b=82),
@@ -94,6 +96,7 @@ def createMapObjects():
         LightingObject(-28.5, 0, -43, rotY=-180),
         LightingObject(-28.5, 0, -57, rotY=-180),
         LightingObject(-28.5, 0, -88, rotY=-180),
+
         # traficlights
         TrafficlightsObject(30.5, 0, -9.5, rotY=0),
         TrafficlightsObject(30.5, 0, -45, rotY=0),
@@ -119,6 +122,7 @@ def createMapObjects():
         TrafficlightsObject(-91.5, 0, -45, rotY=180),
         TrafficlightsObject(-91.5, 0, -55, rotY=180),
         TrafficlightsObject(-91.5, 0, -90, rotY=180),
+
         # cylinders_1
         CylinderObject_1(-89, 0, -9),
         CylinderObject_1(-88.5, 0, -9),
@@ -184,6 +188,7 @@ def createMapObjects():
         CylinderObject_1(88.5, 0, -91),
         CylinderObject_1(88, 0, -91),
         CylinderObject_1(87.5, 0, -91),
+
         # cylinders_2
         CylinderObject_2(-7, 0, -9),
         CylinderObject_2(7, 0, -9),
@@ -200,6 +205,7 @@ def createMapObjects():
         CylinderObject_2(7, 0, -91),
         CylinderObject_2(-85, 0, -91),
         CylinderObject_2(85, 0, -91),
+
         # cones
         ConeObject(0, 0, -9),
         ConeObject(-14, 0, -15),
@@ -212,6 +218,7 @@ def createMapObjects():
         ConeObject(14, 0, -25),
         ConeObject(14, 0, -30),
         ConeObject(14, 0, -35),
+
         # barrier
         BarrierObject(-45, 0, -8),
         BarrierObject(-47.5, 0, -8),
@@ -251,62 +258,60 @@ def createMapObjects():
         BarrierObject(67, 0, -92),
 
         #Ice men
-        IceManObject(-25, 2, -42),
-        IceManObject(25, 2, -42),
-        IceManObject(-40, 2, -13),
-        IceManObject(-40, 2, -38),
-        IceManObject(-90, 2, -70.5),
-        IceManObject(-40, 2, -70.5),
-        IceManObject(-75, 2, -8),
-        IceManObject(-75, 2, -43),
-        IceManObject(-65, 2, -89),
-        IceManObject(0, 2, -89),
-        IceManObject(-65, 2, -54),
-        IceManObject(0, 2, -54),
-        IceManObject(40, 2, -70),
-        IceManObject(91, 2, -70),
-        IceManObject(40, 2, -25),
-        IceManObject(91, 2, -25),
+        IceManObject(-25, .5, -42),
+        IceManObject(25, .5, -42),
+        IceManObject(-40, .5, -13),
+        IceManObject(-90, .5, -70.5),
+        IceManObject(-40, .5, -70.5),
+        IceManObject(-75, .5, -8),
+        IceManObject(-75, .5, -43),
+        IceManObject(-65, .5, -89),
+        IceManObject(0, .5, -89),
+        IceManObject(-65, .5, -54),
+        IceManObject(0, .5, -54),
+        IceManObject(40, .5, -70),
+        IceManObject(91, .5, -70),
+        IceManObject(40, .5, -25),
+        IceManObject(91, .5, -25),
+
         #Trees
-        TreeObject(0, 2, -41),
-        TreeObject(-40, 2, -24.5),
-        TreeObject(-20, 2, -7),
-        TreeObject(20, 2, -7),
-        TreeObject(-40, 2, -57),
-        TreeObject(-40, 2, -82),
-        TreeObject(-20, 2, -54),
-        TreeObject(20, 2, -54),
-        TreeObject(-85, 2, -54),
-        TreeObject(-45, 2, -54),
-        TreeObject(-85, 2, -88),
-        TreeObject(-45, 2, -88),
-        TreeObject(-90, 2, -57),
-        TreeObject(-90, 2, -82),
-        TreeObject(-90, 2, -12),
-        TreeObject(-90, 2, -37),
-        TreeObject(-85, 2, -7),
-        TreeObject(-85, 2, -42),
-        TreeObject(43, 2, -7),
-        TreeObject(43, 2, -42),
-        TreeObject(40, 2, -12),
-        TreeObject(40, 2, -35),
-        TreeObject(87, 2, -7),
-        TreeObject(87, 2, -42),
-        TreeObject(90, 2, -12),
-        TreeObject(90, 2, -35),
-        TreeObject(87, 2, -54),
-        TreeObject(87, 2, -87),
-        TreeObject(90, 2, -58),
-        TreeObject(90, 2, -81),
-        TreeObject(40, 2, -58),
-        TreeObject(40, 2, -81),
+        TreeObject(0, .5, -41),
+        TreeObject(-20, .5, -7),
+        TreeObject(20, .5, -7),
+        TreeObject(-40, .5, -57),
+        TreeObject(-40, .5, -82),
+        TreeObject(-20, .5, -54),
+        TreeObject(20, .5, -54),
+        TreeObject(-85, .5, -54),
+        TreeObject(-45, .5, -54),
+        TreeObject(-85, .5, -88),
+        TreeObject(-45, .5, -88),
+        TreeObject(-90, .5, -57),
+        TreeObject(-90, .5, -82),
+        TreeObject(-90, .5, -12),
+        TreeObject(-90, .5, -37),
+        TreeObject(-85, .5, -7),
+        TreeObject(-85, .5, -42),
+        TreeObject(43, .5, -7),
+        TreeObject(43, .5, -42),
+        TreeObject(40, .5, -12),
+        TreeObject(40, .5, -35),
+        TreeObject(87, .5, -7),
+        TreeObject(87, .5, -42),
+        TreeObject(90, .5, -12),
+        TreeObject(90, .5, -35),
+        TreeObject(87, .5, -54),
+        TreeObject(87, .5, -87),
+        TreeObject(90, .5, -58),
+        TreeObject(90, .5, -81),
+        TreeObject(40, .5, -58),
+        TreeObject(40, .5, -81),
+
         # homes
         # this is the rectangle of upper left -------
-        #HomeObject_5(0, 5.5, -10.1),
-
-        HomeObject_3(-80, 0, -85, rotY=90),
-        HomeObject_3(-80, 0, -73, rotY=90),
-        HomeObject_3(-80, 0, -61, rotY=90),
+        HomeObject_3(-80, 0, -90, rotY=90),
+        HomeObject_3(-80, 0, -78, rotY=90),
+        HomeObject_3(-80, 0, -66, rotY=90),
         HomeObject_2(-68, 0, -85, rotY=180),
         HomeObject_2(-68, 0, -80, rotY=180),
         HomeObject_2(-68, 0, -75, rotY=180),
@@ -330,16 +335,16 @@ def createMapObjects():
         HomeObject_4(-24, 0, -75, rotY=180),
         HomeObject_4(-24, 0, -67, rotY=180),
         HomeObject_4(-24, 0, -60, rotY=180),
-        HomeObject_6(-6, 10, -85, rotY=180),
+        HomeObject_6(-13.5, 8.2, -85, rotY=180),
+        HomeObject_6(-13.5, 8.2, -70, rotY=180),
+        HomeObject_6(4.5, 8.2, -85, rotY=180),
+        HomeObject_6(4.5, 8.2, -70, rotY=180),
+        HomeObject_6(23.5, 8.2, -85, rotY=180),
+        HomeObject_6(23.5, 8.2, -70, rotY=180),
         HomeObject_1(-5, 0, -85, rotY=180),
-        HomeObject_6(11, 10, -85, rotY=180),
         HomeObject_1(13, 0, -85, rotY=180),
-        HomeObject_6(30, 10, -85, rotY=180),
-        HomeObject_6(-6, 10, -70, rotY=180),
         HomeObject_1(-5, 0, -70, rotY=180),
-        HomeObject_6(11, 10, -70, rotY=180),
         HomeObject_1(13, 0, -70, rotY=180),
-        HomeObject_6(30, 10, -70, rotY=180),
         HomeObject_5(25, 4.4, -60, rotY=0),
         HomeObject_5(20, 4.4, -60, rotY=0),
         HomeObject_5(15, 4.4, -60, rotY=0),
@@ -349,7 +354,8 @@ def createMapObjects():
         HomeObject_5(-5, 4.5, -60, rotY=0),
         HomeObject_5(-10, 4.5, -60, rotY=0),
         HomeObject_5(-15, 4.5, -60, rotY=0),
-        # this upper right corner besides the petch
+
+        # this upper right corner besides the beach -----
         HomeObject_2(75, 0, -85, rotY=90),
         HomeObject_2(75, 0, -80, rotY=90),
         HomeObject_2(75, 0, -75, rotY=90),
@@ -368,10 +374,11 @@ def createMapObjects():
         HomeObject_1(86, 0, -70, rotY=-90),
         HomeObject_1(86, 0, -65, rotY=-90),
         HomeObject_1(86, 0, -60, rotY=-90),
+
         # this is the rectangle of lower left -------
-        HomeObject_6(-83, 10, -30, rotY=90),
-        HomeObject_6(-83, 10, -20, rotY=90),
-        HomeObject_6(-83, 10, -10, rotY=90),
+        HomeObject_6(-83, 8.2, -35, rotY=90),
+        HomeObject_6(-83, 8.2, -25, rotY=90),
+        HomeObject_6(-83, 8.2, -15, rotY=90),
         HomeObject_4(-73, 0, -35, rotY=270),
         HomeObject_4(-73, 0, -25, rotY=270),
         HomeObject_4(-73, 0, -15, rotY=270),
@@ -379,21 +386,24 @@ def createMapObjects():
         HomeObject_1(-40, 0, -25, rotY=270),
         HomeObject_1(-40, 0, -32, rotY=270),
         HomeObject_1(-40, 0, -39, rotY=270),
+
         # this lower right corner
+
         # HomeObject_3(74,0,-17,r=0,g=.3,b=.4),
         HomeObject_3(85, 0, -17 - 13, r=0, g=.3, b=.4),
         HomeObject_3(74, 0, -17 - 13, r=0, g=.3, b=.4),
         HomeObject_3(63, 0, -17 - 13, r=0, g=.3, b=.4),
         HomeObject_3(52, 0, -17 - 13, r=0, g=.3, b=.4),
+
         # HomeObject_3(74,0,-17,r=0,g=.3,b=.4),
         HomeObject_3(85, 0, -17 - 13, r=0, g=.3, b=.4),
         HomeObject_3(74, 0, -17 - 13, r=0, g=.3, b=.4),
         HomeObject_3(63, 0, -17 - 13, r=0, g=.3, b=.4),
         HomeObject_3(52, 0, -17 - 13, r=0, g=.3, b=.4),
-        HomeObject_6(78, 9, -19),
-        HomeObject_6(68, 9, -19),
-        HomeObject_6(58, 9, -19),
-        HomeObject_6(48, 9, -19),
+        HomeObject_6(84, 8.2, -19),
+        HomeObject_6(74, 8.2, -19),
+        HomeObject_6(64, 8.2, -19),
+        HomeObject_6(54, 9, -19),
         HomeObject_1(50, 0, -11, r1=0, g1=.5, b1=.5, r2=0, g2=1, b2=1, rotY=180),
         HomeObject_1(58, 0, -11, r1=0, g1=.5, b1=.5, r2=0, g2=1, b2=1, rotY=180),
         HomeObject_1(66, 0, -11, r1=0, g1=.5, b1=.5, r2=0, g2=1, b2=1, rotY=180),
@@ -402,12 +412,40 @@ def createMapObjects():
         HomeObject_1(42, 0, -14, r1=0, g1=.5, b1=.5, r2=0, g2=1, b2=1, rotY=90),
         HomeObject_1(42, 0, -22, r1=0, g1=.5, b1=.5, r2=0, g2=1, b2=1, rotY=90),
         HomeObject_1(42, 0, -30, r1=0, g1=.5, b1=.5, r2=0, g2=1, b2=1, rotY=90),
+
         HomeObject_4(87, 0, -41, r=0, g=.4, b=0),
         HomeObject_4(44, 0, -41, r=0, g=.4, b=0),
         HomeObject_1(77, 0, -42, r1=0, g1=.5, b1=.5, r2=0, g2=1, b2=1, rotY=0),
         HomeObject_4(66, 0, -41, r=1, g=0, b=0),
         HomeObject_1(55, 0, -42),
-        # Staic cars of the park
+
+        # Static cars of the park
+        Car2(22.5, 1, -12.3,rotY=90),
+        Car2(28, 1, -22,rotY=90),
+        Car2(17, 1, -22,rotY=90),
+        Car2(22.5, 1, -28.5,rotY=90),
+        Car2(28, 1, -37,rotY=90),
+        Car2(17, 1, -37,rotY=90),
+        Car2(-21.5, 1, -12.3,rotY=90),
+        Car2(-27, 1, -22,rotY=90),
+        Car2(-16, 1, -22,rotY=90),
+        Car2(-21.5, 1, -28.5,rotY=90),
+        Car2(-27, 1, -37,rotY=90),
+        Car2(-16, 1, -37,rotY=90),
+        Car1(28, 1, -12.3,rotY=90),
+        Car1(17, 1, -12.3,rotY=90),
+        Car1(22.5, 1, -22,rotY=90),
+        Car1(28, 1, -28.5,rotY=90),
+        Car1(17, 1, -28.5,rotY=90),
+        Car1(22.5, 1, -37,rotY=90),
+        Car1(-27, 1, -12.3,rotY=90),
+        Car1(-16, 1, -12.3,rotY=90),
+        Car1(-21.5, 1, -22,rotY=90),
+        Car1(-27, 1, -28.5,rotY=90),
+        Car1(-16, 1, -28.5,rotY=90),
     ]
-    startCycle_1(c1)
+    startCycle_1(objs[0])
+    startCycle_2(objs[1])
+    Straight(objs[2])
+    Straight(objs[3])
     return objs
