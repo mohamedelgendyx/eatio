@@ -9,9 +9,9 @@ def createMapObjects():
         # Moving Cars
         Car1(0, 1, -1),
         Car1(0, 1, 0),
-        CarTaxi(-31,1,0),
-        CarPolice(33,0,0),
-        Car_bus(0,1,-10),
+        CarTaxi(-31, 1, 0),
+        CarPolice(33, 0, 0),
+        Car_bus(0, 1, -10),
 
         # characterObjects
         CharacterObject(-48, 0, -34, r=143, g=54, b=137),
@@ -257,7 +257,7 @@ def createMapObjects():
         BarrierObject(64.5, 0, -92),
         BarrierObject(67, 0, -92),
 
-        #Ice men
+        # Ice men
         IceManObject(-25, .5, -42),
         IceManObject(25, .5, -42),
         IceManObject(-40, .5, -13),
@@ -274,7 +274,7 @@ def createMapObjects():
         IceManObject(40, .5, -25),
         IceManObject(91, .5, -25),
 
-        #Trees
+        # Trees
         TreeObject(0, .5, -41),
         TreeObject(-20, .5, -7),
         TreeObject(20, .5, -7),
@@ -420,29 +420,29 @@ def createMapObjects():
         HomeObject_1(55, 0, -42),
 
         # Static cars of the park
-        Car2(22.5, 1, -12.3,rotY=90),
-        Car2(28, 1, -22,rotY=90),
-        Car2(17, 1, -22,rotY=90),
-        Car2(22.5, 1, -28.5,rotY=90),
-        Car2(28, 1, -37,rotY=90),
-        Car2(17, 1, -37,rotY=90),
-        Car2(-21.5, 1, -12.3,rotY=90),
-        Car2(-27, 1, -22,rotY=90),
-        Car2(-16, 1, -22,rotY=90),
-        Car2(-21.5, 1, -28.5,rotY=90),
-        Car2(-27, 1, -37,rotY=90),
-        Car2(-16, 1, -37,rotY=90),
-        Car1(28, 1, -12.3,rotY=90),
-        Car1(17, 1, -12.3,rotY=90),
-        Car1(22.5, 1, -22,rotY=90),
-        Car1(28, 1, -28.5,rotY=90),
-        Car1(17, 1, -28.5,rotY=90),
-        Car1(22.5, 1, -37,rotY=90),
-        Car1(-27, 1, -12.3,rotY=90),
-        Car1(-16, 1, -12.3,rotY=90),
-        Car1(-21.5, 1, -22,rotY=90),
-        Car1(-27, 1, -28.5,rotY=90),
-        Car1(-16, 1, -28.5,rotY=90),
+        Car2(22.5, 1, -12.3, rotY=90),
+        Car2(28, 1, -22, rotY=90),
+        Car2(17, 1, -22, rotY=90),
+        Car2(22.5, 1, -28.5, rotY=90),
+        Car2(28, 1, -37, rotY=90),
+        Car2(17, 1, -37, rotY=90),
+        Car2(-21.5, 1, -12.3, rotY=90),
+        Car2(-27, 1, -22, rotY=90),
+        Car2(-16, 1, -22, rotY=90),
+        Car2(-21.5, 1, -28.5, rotY=90),
+        Car2(-27, 1, -37, rotY=90),
+        Car2(-16, 1, -37, rotY=90),
+        Car1(28, 1, -12.3, rotY=90),
+        Car1(17, 1, -12.3, rotY=90),
+        Car1(22.5, 1, -22, rotY=90),
+        Car1(28, 1, -28.5, rotY=90),
+        Car1(17, 1, -28.5, rotY=90),
+        Car1(22.5, 1, -37, rotY=90),
+        Car1(-27, 1, -12.3, rotY=90),
+        Car1(-16, 1, -12.3, rotY=90),
+        Car1(-21.5, 1, -22, rotY=90),
+        Car1(-27, 1, -28.5, rotY=90),
+        Car1(-16, 1, -28.5, rotY=90),
     ]
     startCycle_1(objs[0])
     startCycle_2(objs[1])
