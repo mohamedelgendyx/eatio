@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+
 from OpenGL.GL import *
 
 from constants import *
@@ -6,7 +7,8 @@ from constants import *
 
 class Animation:
 
-    def __init__(self, valueName, fromValue, toValue, animationTime, priority=AnimationPriority.Normal, onAnimationFinished=None):
+    def __init__(self, valueName, fromValue, toValue, animationTime, priority=AnimationPriority.Normal,
+                 onAnimationFinished=None):
         self.valueName = valueName
         self.fromValue = fromValue
         self.toValue = toValue
@@ -15,9 +17,11 @@ class Animation:
         self.currentProgress = 0
         self.onAnimationFinished = onAnimationFinished
 
+
 class DeltaAnimation:
 
-    def __init__(self, valueName, deltaValue, animationTime, priority=AnimationPriority.Normal, onAnimationFinished=None):
+    def __init__(self, valueName, deltaValue, animationTime, priority=AnimationPriority.Normal,
+                 onAnimationFinished=None):
         self.valueName = valueName
         self.deltaValue = deltaValue
         self.animationTime = animationTime
@@ -39,15 +43,19 @@ class GameObject(ABC):
         self.scaleZ = scaleZ
 
         self.rotY = rotY
+        self.area = None
 
         self.animationList = []
         super().__init__()
 
     def applyParentTransform(self):
         glLoadIdentity()
-        glTranslate(self.posX, self.posY, self.posZ)
-        glRotate(self.rotY, 0, 1, 0)
-        glScale(self.scaleX, self.scaleY, self.scaleZ)
+        if self.posX != 0 or self.posY != 0 or self.posY != 0:
+            glTranslate(self.posX, self.posY, self.posZ)
+        if self.rotY != 0:
+            glRotate(self.rotY, 0, 1, 0)
+        if self.scaleX != 1 or self.scaleY != 1 or self.scaleZ != 1:
+            glScale(self.scaleX, self.scaleY, self.scaleZ)
 
     @abstractmethod
     def draw(self):
@@ -74,6 +82,7 @@ class GameObject(ABC):
             return animation.fromValue + (animation.deltaValue * animation.currentProgress)
 
     def onFrameTick(self, dt):
+
         highPriority = []
         for anim in self.animationList:
             if anim.priority == AnimationPriority.High:
@@ -111,7 +120,7 @@ class GameObject(ABC):
             self.animationList.remove(tbr)
             if not tbr.onAnimationFinished is None:
                 tbr.onAnimationFinished()
-                print("on animation finished called !!")
+                # print("on animation finished called !!")
 
     def startAnimation(self, animation):
         animation.currentProgress = 0
