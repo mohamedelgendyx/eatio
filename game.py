@@ -1,5 +1,6 @@
 from time import time
-from CollisionDetection import testCube
+
+from CollisionDetection import isCollided
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 
@@ -10,11 +11,17 @@ from initopengl import initOpenGl
 from intractable_objects import createMapObjects
 from objects.PlayerObject import *
 
-cameraZoom = 0
+player = PlayerObject()
+
 deltaTime = 0
 currentTime = 0
+currentGameStatus = 0
+
+cameraZoom = 0
+currentGameScore = 0
 intractableObjects = []
-currentGameStatus=0
+needToBeRemoved = []
+
 
 def initCamera():
     global player, cameraZoom
@@ -27,8 +34,42 @@ def initCamera():
     glMatrixMode(GL_MODELVIEW)
 
 
-def draw():
+referenceGameScore = 0
+toMakeBigger = 10
 
+
+def Score_update(currGameScore):
+    global referenceGameScore, toMakeBigger
+    global currentGameScore
+    if currGameScore - referenceGameScore >= toMakeBigger:
+        player.radius += 1
+        player.update_area()
+        referenceGameScore = currGameScore
+        drawText2D("Size Up!", player.posX, 2, player.posZ, scaleFactor=0.6)
+        toMakeBigger *= 3
+        return True
+    return False
+
+
+currentlyEating = []
+
+
+def eatObject(i):
+    global player
+    global currentlyEating
+    if not currentlyEating.__contains__(i):
+        i.animationList = []
+        i.startAnimation(Animation(AnimationParams.posX, None, player.posX, 0.4, priority=AnimationPriority.High))
+        i.startAnimation(
+            Animation(AnimationParams.posZ, None, player.posZ, 0.4, priority=AnimationPriority.High))
+        global intractableObjects
+        global needToBeRemoved
+        i.startAnimation(DeltaAnimation(AnimationParams.posY, -5, 0.4, priority=AnimationPriority.High,
+                                        onAnimationFinished=lambda: needToBeRemoved.append(i)))
+        currentlyEating.append(i)
+
+
+def draw():
     # Delta Time
     global cameraZoom
     global currentTime
@@ -43,13 +84,14 @@ def draw():
 
     global currentGameStatus
     global currentGameScore
-    glClearColor(0,0.49,0.76, 1)
+
+    glClearColor(0, 0.49, 0.76, 1)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glColor3f(0, 0, 1)
     glLoadIdentity()
 
     if currentGameStatus >= GAME_STATUS_SCORE:
-        glClearColor(0, 0 , 0 , 1 )
+        glClearColor(0, 0, 0, 1)
         glClear(GL_COLOR_BUFFER_BIT)
         glMatrixMode(GL_PROJECTION)
         glLoadIdentity()
@@ -57,12 +99,13 @@ def draw():
         glMatrixMode(GL_MODELVIEW)
         drawImage2D("resources/images/score_title.png", 0, 2.5)
         drawText2D(str(round(currentGameScore)), 0, -1, scaleFactor=1)
+
     if GAME_STATUS_PLAYING < currentGameStatus < GAME_STATUS_SCORE:
         global intractableObjects
         initCamera()
         glLoadIdentity()
 
-        #glDisable(GL_BLEND)
+        # glDisable(GL_BLEND)
         glDisable(GL_DEPTH_TEST)
         glDisable(GL_CULL_FACE)
         drawMap()
@@ -70,45 +113,40 @@ def draw():
         glEnable(GL_BLEND)
         glEnable(GL_CULL_FACE)
         glEnable(GL_DEPTH_TEST)
-        glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA)
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
         player.onFrameTick(deltaTime)
+
         player.draw()
         draw_others()
+
+        # collision
         for i in intractableObjects:
-              if i.rotY == 90 or  i.rotY == -90:
-                      if testCube(player.radius, player.posX, player.posZ, i.width , i.Length, i.posX,i.posZ) == True:
-                          if i.area > player.area:
-                              i.a = 0.4
-                          else :
-                            #i.startAnimation(DeltaAnimation( AnimationParams.posY , - 5 ,50,onAnimationFinished=intractableObjects.remove(i) ))
-                            i.startAnimation(DeltaAnimation(AnimationParams.posX, 5, 10, onAnimationFinished=intractableObjects.remove(i) ))
-                            i.startAnimation(DeltaAnimation(AnimationParams.posZ, None, player.posZ, 1 ))
-                            currentGameScore+=i.area//AREA_TO_SCORE
-                            #print(currentGameScore)
-                      else:
-                          i.a =1
-              else:
-                  if testCube(player.radius, player.posX, player.posZ, i.Length, i.width, i.posX, i.posZ) == True:
-                      if i.area> player.area:
-                          i.a = 0.4
-                      else:
-                          i.startAnimation(Animation(AnimationParams.posX ,None , player.posX ,1, onAnimationFinished=intractableObjects.remove(i)))
-                          i.startAnimation(Animation(AnimationParams.posZ ,None ,player.posZ ,1))
-                          #i.startAnimation(DeltaAnimation(AnimationParams.posY, - 5, 50,  onAnimationFinished=intractableObjects.remove(i)))
-                          currentGameScore += i.area // AREA_TO_SCORE
-                          print(currentGameScore)
+            if isCollided(player, i):
+                if player.area > i.area:
+                    eatObject(i)
+                else:
+                    # decrease opacity
+                    i.alpha = 0.4
+            else:
+                # revert opacity
+                i.alpha = 1
 
+        global needToBeRemoved
+        for tbr in needToBeRemoved:
+            intractableObjects.remove(tbr)
+            currentGameScore += tbr.area // AREA_TO_SCORE_RATIO
 
-                  else :
-                      i.a=1
+        needToBeRemoved.clear()
+
+        # draw + frameTick
         for o in intractableObjects:
             o.onFrameTick(deltaTime)
             o.draw()
         if Score_update(currentGameScore):
-            cameraZoom+=5
+            cameraZoom += 5
 
     if GAME_STATUS_COUNTDOWN <= currentGameStatus < GAME_STATUS_PLAYING:
-        glClearColor(0, 0 , 0 , 1 )
+        glClearColor(0, 0, 0, 1)
         glClear(GL_COLOR_BUFFER_BIT)
         glMatrixMode(GL_PROJECTION)
         glLoadIdentity()
@@ -124,16 +162,18 @@ def draw():
             drawImage2D("resources/images/countdown_3.png", 0, 0,
                         scaleFactor=0.5 + (currentGameStatus - GAME_STATUS_COUNTDOWN))
     if currentGameStatus == GAME_STATUS_MAINMENU:
-        glClearColor(0,0,0,1)
+        glClearColor(0, 0, 0, 1)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         glMatrixMode(GL_PROJECTION)
         glLoadIdentity()
         gluOrtho2D(-5, 5, -5, 5)
         glMatrixMode(GL_MODELVIEW)
         drawText2D("CLICK TO PLAY !", 0, 0, scaleFactor=0.5)
+
     if not currentGameStatus == GAME_STATUS_MAINMENU:
         currentGameStatus += deltaTime
     glutSwapBuffers()
+
 
 def onKeyboardKeyDown(key, x, y):
     global currentGameStatus
@@ -153,39 +193,51 @@ def onKeyboardKeyDown(key, x, y):
 def onSpecialKeyDown(key, x, y):
     global player
     global angle
+
+    speed = min(max(15 / player.radius, PLAYER_MINIMUM_SPEED), PLAYER_MAXIMUM_SPEED) * PLAYER_SPEED_FACTOR
+
     if key == GLUT_KEY_RIGHT:
-        if player.posX < 100-player.radius:
-            player.startAnimation(DeltaAnimation(AnimationParams.posX,+PLAYER_MINIMUM_MOVEMENT ,.001))
+        if player.posX < 100 - player.radius:
+            # player.startAnimation(DeltaAnimation(AnimationParams.posX,+PLAYER_MINIMUM_MOVEMENT ,.001))
+            player.posX += speed * deltaTime
         player.rotY = 90
-        player.x = player.radius +.2
+        player.x = player.radius + .2
         player.z = 0
 
 
     elif key == GLUT_KEY_LEFT:
-        if player.posX > -100 +player.radius:
-            player.startAnimation(DeltaAnimation(AnimationParams.posX,-PLAYER_MINIMUM_MOVEMENT ,.001))
+        if player.posX > -100 + player.radius:
+            # player.startAnimation(DeltaAnimation(AnimationParams.posX,-PLAYER_MINIMUM_MOVEMENT ,.001))
+            player.posX -= speed * deltaTime
         player.rotY = -90
-        player.x = -player.radius-.2
+        player.x = -player.radius - .2
         player.z = 0
 
     elif key == GLUT_KEY_DOWN:
         if player.posZ < -player.radius:
-            player.startAnimation(DeltaAnimation(AnimationParams.posZ, +PLAYER_MINIMUM_MOVEMENT , .001))
+            # player.startAnimation(DeltaAnimation(AnimationParams.posZ, +PLAYER_MINIMUM_MOVEMENT , .001))
+            player.posZ += speed * deltaTime
         player.rotY = 0
-        player.z = player.radius+.2
+        player.z = player.radius + .2
         player.x = 0
     elif key == GLUT_KEY_UP:
 
-        if player.posZ > -100+player.radius:
-            player.startAnimation(DeltaAnimation(AnimationParams.posZ, -PLAYER_MINIMUM_MOVEMENT, .001))
+        if player.posZ > -100 + player.radius:
+            # player.startAnimation(DeltaAnimation(AnimationParams.posZ, -PLAYER_MINIMUM_MOVEMENT, .001))
+            player.posZ -= speed * deltaTime
         player.rotY = 180
-        player.z = - player.radius-.2
+        player.z = - player.radius - .2
         player.x = 0
+
+
 def onMouseKeyDown(button, state, x, y):
     global currentGameStatus
     if button == GLUT_LEFT_BUTTON and currentGameStatus == GAME_STATUS_MAINMENU:
         currentGameStatus = GAME_STATUS_COUNTDOWN
         global intractableObjects
+        global currentGameScore
+        currentGameScore = 0
         intractableObjects = createMapObjects()
+
 
 initOpenGl(draw, onMouseKeyDown, onKeyboardKeyDown, onSpecialKeyDown)
