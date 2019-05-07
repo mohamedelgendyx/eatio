@@ -57,7 +57,7 @@ def drawImage2D(filename, x, y, tintColorR=1, tintColorG=1, tintColorB=1, scaleF
 font = None
 
 
-def drawText2D(text, x, y,z=0, tintColorR=1, tintColorG=1, tintColorB=1, scaleFactor=1):
+def drawText2D(text, x, y, z=0, tintColorR=1, tintColorG=1, tintColorB=1, scaleFactor=1):
     glLoadIdentity()
     global font
     if font is None:
@@ -70,7 +70,8 @@ def drawText2D(text, x, y,z=0, tintColorR=1, tintColorG=1, tintColorB=1, scaleFa
         texid = cachedTexturesHandles[text]
     else:
         print("loading texture ..")
-        textureSurface = font.render(text, True, (tintColorR * 255, tintColorG * 255, tintColorB * 255, 255), (0, 0, 0, 255))
+        textureSurface = font.render(text, True, (tintColorR * 255, tintColorG * 255, tintColorB * 255, 255),
+                                     (0, 0, 0, 255))
         cachedTextures[text] = textureSurface
         textureData = pygame.image.tostring(textureSurface, "RGBA", 1)
         cachedTexturesData[text] = textureData
