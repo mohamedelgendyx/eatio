@@ -9,7 +9,7 @@ class CharacterObject(GameObject):
         super().__init__(posX, posY, posZ, scaleX, scaleY, scaleZ, rotY)
         self.Length = 0
         self.width = 0
-        self.area = 2
+        self.area = 1
         self.HeadDeltaY = 0
         self.HeadUpDown = 1
         self.r = r / 255
