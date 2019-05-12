@@ -1,5 +1,6 @@
 from math import *
 
+
 def isCollided(player, obj):
     if obj.rotY == 90 or obj.rotY == -90:
         return testCube(player.radius, player.posX, player.posZ, obj.width, obj.Length, obj.posX, obj.posZ)
@@ -8,7 +9,6 @@ def isCollided(player, obj):
 
 
 def testCube(playerRadius, playerCX, playerCZ, objectLength, objectWidth, objectCX, objectCZ):
-    
     # ObjectDimensions
 
     objectLength = objectLength / 2
