@@ -1,7 +1,4 @@
-from enum import Enum
-
-
-class AnimationParams(Enum):
+class AnimationParams:
     posX = "posX"
     posY = "posY"
     posZ = "posZ"
@@ -13,6 +10,6 @@ class AnimationParams(Enum):
     rotY = "rotY"
 
 
-class AnimationPriority(Enum):
+class AnimationPriority:
     Normal = 0
     High = 1
