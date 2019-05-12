@@ -1,5 +1,3 @@
-from abc import ABC, abstractmethod
-
 from OpenGL.GL import *
 
 from constants import *
@@ -31,7 +29,7 @@ class DeltaAnimation:
         self.onAnimationFinished = onAnimationFinished
 
 
-class GameObject(ABC):
+class GameObject():
 
     def __init__(self, posX, posY, posZ, scaleX=1, scaleY=1, scaleZ=1, rotY=0):
         self.posX = posX
@@ -57,12 +55,10 @@ class GameObject(ABC):
         if self.scaleX != 1 or self.scaleY != 1 or self.scaleZ != 1:
             glScale(self.scaleX, self.scaleY, self.scaleZ)
 
-    @abstractmethod
     def draw(self):
         pass
 
-    @staticmethod
-    def _calculateNextValue(currentValue, animation):
+    def _calculateNextValue(self, currentValue, animation):
 
         if isinstance(animation, Animation):
 
