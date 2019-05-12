@@ -10,7 +10,7 @@ class LightingObject(GameObject):
         self.Length = 0
         self.width = 0
         self.alpha = al
-        self.area = 2
+        self.area = 1.5
 
     def draw(self):
         self.applyParentTransform()
@@ -60,7 +60,7 @@ class CylinderObject_1(GameObject):
         super().__init__(posX, posY, posZ, scaleX, scaleY, scaleZ, rotY)
         self.Length = 0
         self.width = 0
-        self.area = 2
+        self.area = 1
         self.alpha = 1
 
     def draw(self):
@@ -75,7 +75,7 @@ class CylinderObject_2(GameObject):
         super().__init__(posX, posY, posZ, scaleX, scaleY, scaleZ, rotY)
         self.Length = 0
         self.width = 0
-        self.area = 2
+        self.area = 1
         self.alpha = 1
 
     def draw(self):
@@ -154,7 +154,7 @@ class TrafficlightsObject(GameObject):
         super().__init__(posX, posY, posZ, scaleX, scaleY, scaleZ, rotY)
         self.Length = 0
         self.width = 0
-        self.area = 2
+        self.area = 1.5
         self.alpha = 1
 
     def draw(self):
