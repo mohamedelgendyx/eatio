@@ -3,8 +3,6 @@ from gameobject import *
 
 
 class Car1(GameObject):
-    # def onFrameTick(self, dt):
-    # super().onFrameTick(dt)
 
     def __init__(self, posX, posY, posZ, scaleX=1, scaleY=1, scaleZ=1, rotY=0):
         super().__init__(posX, posY, posZ, scaleX, scaleY, scaleZ, rotY)
@@ -820,7 +818,7 @@ class CarPolice(GameObject):
         glScale(.06, 0.06, 0.09)
         glLineWidth(1.3)
         glutSolidCube(5)
-        
+
         self.applyParentTransform()
         glColor4f(.54296, 0, 0, self.alpha)
         glTranslate(-3.06, .6, -.6)
@@ -833,28 +831,22 @@ class CarPolice(GameObject):
 # first cycle
 def fourthPart_1(obj):
     obj.rotY = 270
-    # a7 = Animation(AnimationParams.posX, None, -94.25, 3)
     a8 = Animation(AnimationParams.posZ, None, -52.75, 3)
     a8.onAnimationFinished = lambda: startCycle_1(obj)
-    # obj.startAnimation(a7)
     obj.startAnimation(a8)
 
 
 def thirdPart_1(obj):
     obj.rotY = 180
     a5 = Animation(AnimationParams.posX, None, -96, 3)
-    # a6 = Animation(AnimationParams.posZ, None, -93.5, 3)
     a5.onAnimationFinished = lambda: fourthPart_1(obj)
     obj.startAnimation(a5)
-    # obj.startAnimation(a6)
 
 
 def secondPart_1(obj):
     obj.rotY = 90
-    # a3 = Animation(AnimationParams.posX, None, -35, 3)
     a4 = Animation(AnimationParams.posZ, None, -96, 3)
     a4.onAnimationFinished = lambda: thirdPart_1(obj)
-    # obj.startAnimation(a3)
     obj.startAnimation(a4)
 
 
@@ -874,28 +866,22 @@ def startCycle_1(obj, offsetTime=0):
 # first cycle
 def fourthPart_2(obj):
     obj.rotY = 270
-    # a7 = Animation(AnimationParams.posX, None, -94.25, 3)
     a8 = Animation(AnimationParams.posZ, None, -52.75, 3)
     a8.onAnimationFinished = lambda: startCycle_2(obj)
-    # obj.startAnimation(a7)
     obj.startAnimation(a8)
 
 
 def thirdPart_2(obj):
     obj.rotY = 180
     a5 = Animation(AnimationParams.posX, None, 96, 3)
-    # a6 = Animation(AnimationParams.posZ, None, -93.5, 3)
     a5.onAnimationFinished = lambda: fourthPart_2(obj)
     obj.startAnimation(a5)
-    # obj.startAnimation(a6)
 
 
 def secondPart_2(obj):
     obj.rotY = 90
-    # a3 = Animation(AnimationParams.posX, None, -35, 3)
     a4 = Animation(AnimationParams.posZ, None, -96, 3)
     a4.onAnimationFinished = lambda: thirdPart_2(obj)
-    # obj.startAnimation(a3)
     obj.startAnimation(a4)
 
 
@@ -910,10 +896,8 @@ def startCycle_2(obj, offsetTime=0):
     obj.startAnimation(a2)
 
 
-def Straight(obj):
+def Straight(obj, offsetTime=0):
     obj.rotY = 90
-    # a7 = Animation(AnimationParams.posX, None, -94.25, 3)
-    a20 = Animation(AnimationParams.posZ, -2, -98, 5)
+    a20 = Animation(AnimationParams.posZ, -2, -98, 5 + offsetTime)
     a20.onAnimationFinished = lambda: Straight(obj)
-    # obj.startAnimation(a7)
     obj.startAnimation(a20)
